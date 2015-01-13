@@ -1,0 +1,27 @@
+{
+  "name": "f3l1x/nette-recaptcha",
+  "type": "library",
+  "description": "Google reCAPTCHA for Nette Framework - Forms",
+  "license": "GNU",
+  "homepage": "http://github.com/f3l1x/Nette-reCAPTCHA",
+  "authors": [
+    {
+      "name": "Milan Felix Sulc",
+      "homepage": "http://jfx.cz"
+    }
+  ],
+  "require": {
+    "php": ">= 5.4",
+    "nette/forms": "2.2.*",
+    "nette/utils": "2.2.*"
+  },
+  "require-dev": {
+    "nette/tester": "~1.3.0"
+  },
+  "autoload": {
+    "classmap": ["src/"]
+  },
+  "config": {
+    "vendor-dir": "vendor"
+  }
+}

@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+sh ../vendor/bin/tester -w %CD%\reCAPTCHA -s -j 40 -log ./recaptcha.log
+rm "./tmp" -f -R
