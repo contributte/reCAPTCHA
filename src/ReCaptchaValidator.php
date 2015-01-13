@@ -84,10 +84,10 @@ final class ReCaptchaValidator
      */
     private function makeRequest($response, $remoteIp = NULL)
     {
-        $params = array(
+        $params = [
             'secret' => $this->secretKey,
             'response' => $response,
-        );
+        ];
 
         if ($remoteIp) {
             $params['remoteip'] = $remoteIp;
@@ -100,7 +100,7 @@ final class ReCaptchaValidator
      * @param array $parameters
      * @return string
      */
-    private function buildUrl(array $parameters = array())
+    private function buildUrl(array $parameters = [])
     {
         $url = new Url(self::VERIFICATION_URL);
 

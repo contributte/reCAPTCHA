@@ -72,11 +72,11 @@ final class ReCaptchaField extends HiddenField
         $this->setOption('rendered', TRUE);
 
         $el = clone $this->control;
-        $el->addAttributes(array(
+        $el->addAttributes([
             'id' => $this->getHtmlId(),
             'name' => $this->getHtmlName(),
             'data-sitekey' => $this->getSiteKey(),
-        ));
+        ]);
 
         return $el;
     }
