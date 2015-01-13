@@ -3,7 +3,7 @@
   "type": "library",
   "description": "Google reCAPTCHA for Nette Framework - Forms",
   "license": "GNU",
-  "homepage": "http://github.com/f3l1x/Nette-reCAPTCHA",
+  "homepage": "https://github.com/f3l1x/Nette-reCAPTCHA",
   "authors": [
     {
       "name": "Milan Felix Sulc",
