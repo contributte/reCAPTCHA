@@ -5,6 +5,7 @@ Nette-reCAPTCHA
 [![Downloads this Month](https://img.shields.io/packagist/dm/f3l1x/nette-recaptcha.svg?style=flat)](https://packagist.org/packages/f3l1x/nette-recaptcha)
 [![Latest stable](https://img.shields.io/packagist/v/f3l1x/nette-recaptcha.svg?style=flat)](https://packagist.org/packages/f3l1x/nette-recaptcha)
 [![Code Climate](https://codeclimate.com/github/f3l1x/Nette-reCAPTCHA/badges/gpa.svg)](https://codeclimate.com/github/f3l1x/Nette-reCAPTCHA)
+[![HHVM Status](https://img.shields.io/hhvm/f3l1x/Nette-reCAPTCHA.svg?style=flat)](http://hhvm.h4cc.de/package/f3l1x/Nette-reCAPTCHA)
 
 Google reCAPTCHA implementation for Nette Framework #nette #nettefw
 
