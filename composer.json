@@ -1,9 +1,9 @@
 {
-  "name": "f3l1x/nette-recaptcha",
+  "name": "minetro/recaptcha",
   "type": "library",
-  "description": "Google reCAPTCHA for Nette Framework - Forms",
+  "description": "Google reCAPTCHA for Nette - Forms",
   "license": "GNU",
-  "homepage": "https://github.com/f3l1x/Nette-reCAPTCHA",
+  "homepage": "https://github.com/minetro/reCAPTCHA",
   "authors": [
     {
       "name": "Milan Felix Sulc",

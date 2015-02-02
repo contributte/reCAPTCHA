@@ -1,6 +1,6 @@
 <?php
 
-namespace Forms\reCAPTCHA;
+namespace Minetro\Forms\reCAPTCHA;
 
 use Nette\Forms\Controls\BaseControl;
 use Nette\Http\Url;

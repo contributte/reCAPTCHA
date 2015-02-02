@@ -1,6 +1,6 @@
 <?php
 
-namespace Forms\reCAPTCHA;
+namespace Minetro\Forms\reCAPTCHA;
 
 use Nette\Forms\Controls\HiddenField;
 use Nette\Forms\Form;

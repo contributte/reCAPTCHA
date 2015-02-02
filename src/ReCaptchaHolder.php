@@ -1,6 +1,6 @@
 <?php
 
-namespace Forms\reCAPTCHA;
+namespace Minetro\Forms\reCAPTCHA;
 
 /**
  * reCAPTCHA Holder

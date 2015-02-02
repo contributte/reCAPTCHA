@@ -1,21 +1,21 @@
-Nette-reCAPTCHA
+reCAPTCHA
 ===============
 
-[![Build Status](https://travis-ci.org/f3l1x/Nette-reCAPTCHA.svg?branch=master)](https://travis-ci.org/f3l1x/Nette-reCAPTCHA)
-[![Downloads this Month](https://img.shields.io/packagist/dm/f3l1x/nette-recaptcha.svg?style=flat)](https://packagist.org/packages/f3l1x/nette-recaptcha)
-[![Latest stable](https://img.shields.io/packagist/v/f3l1x/nette-recaptcha.svg?style=flat)](https://packagist.org/packages/f3l1x/nette-recaptcha)
-[![Code Climate](https://codeclimate.com/github/f3l1x/Nette-reCAPTCHA/badges/gpa.svg)](https://codeclimate.com/github/f3l1x/Nette-reCAPTCHA)
-[![HHVM Status](https://img.shields.io/hhvm/f3l1x/Nette-reCAPTCHA.svg?style=flat)](http://hhvm.h4cc.de/package/f3l1x/Nette-reCAPTCHA)
+[![Build Status](https://travis-ci.org/minetro/recaptcha.svg?branch=master)](https://travis-ci.org/minetro/recaptcha)
+[![Downloads this Month](https://img.shields.io/packagist/dm/minetro/recaptcha.svg?style=flat)](https://packagist.org/packages/minetro/recaptcha)
+[![Latest stable](https://img.shields.io/packagist/v/minetro/recaptcha.svg?style=flat)](https://packagist.org/packages/minetro/recaptcha)
+[![Code Climate](https://codeclimate.com/github/minetro/recaptcha/badges/gpa.svg)](https://codeclimate.com/github/minetro/recaptcha)
+[![HHVM Status](https://img.shields.io/hhvm/minetro/recaptcha.svg?style=flat)](http://hhvm.h4cc.de/package/minetro/recaptcha)
 
 Google reCAPTCHA implementation for Nette Framework #nette #nettefw
 
 # Install
 
 ```sh
-$ composer require f3l1x/nette-recaptcha:dev-master
+$ composer require minetro/recaptcha:dev-master
 ```
 
-![reCAPTCHA](https://raw.githubusercontent.com/f3l1x/Nette-reCAPTCHA/master/recaptcha.png)
+![reCAPTCHA](https://raw.githubusercontent.com/minetro/recaptcha/master/recaptcha.png)
 
 # Configuration
 
@@ -30,19 +30,19 @@ reCAPTCHA:
 ## NEON - services
 ```neon
 reCAPTCHA.validator:
-    class: Forms\reCAPTCHA\ReCaptchaValidator
-    implement: Forms\reCAPTCHA\IReCaptchaValidatorFactory
+    class: Minetro\Forms\reCAPTCHA\ReCaptchaValidator
+    implement: Minetro\Forms\reCAPTCHA\IReCaptchaValidatorFactory
     arguments: [%reCAPTCHA.secretKey%]
 
 reCAPTCHA.holder:
-    factory: Forms\reCAPTCHA\ReCaptchaHolder::factory(%reCAPTCHA.siteKey%)
+    factory: Minetro\Forms\reCAPTCHA\ReCaptchaHolder::factory(%reCAPTCHA.siteKey%)
     tags: [run]
 ```
 
 ## Forms
 ```php
-use Forms\reCAPTCHA\ReCaptchaField;
-use Forms\reCAPTCHA\ReCaptchaHolder;
+use Minetro\Forms\reCAPTCHA\ReCaptchaField;
+use Minetro\Forms\reCAPTCHA\ReCaptchaHolder;
 use Nette\Application\UI\Form;
 
 class MyForm extends Form
@@ -61,8 +61,8 @@ class MyForm extends Form
 
 ## Presenter/Control
 ```php
-use Forms\reCAPTCHA\ReCaptchaField;
-use Forms\reCAPTCHA\IReCaptchaValidatorFactory;
+use Minetro\Forms\reCAPTCHA\ReCaptchaField;
+use Minetro\Forms\reCAPTCHA\IReCaptchaValidatorFactory;
 use Nette\Application\UI\Form;
 
 /** @var IReCaptchaValidatorFactory @inject */
