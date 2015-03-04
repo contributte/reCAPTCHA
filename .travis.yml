@@ -11,7 +11,7 @@ matrix:
         - php: 7.0
 
 script:
-    - vendor/bin/tester -w tests/reCAPTCHA -p php -c tests/php-unix.ini
+    - vendor/bin/tester tests/reCAPTCHA -s -p php -c tests/php-unix.ini
 
 after_failure:
     # Print *.actual content
