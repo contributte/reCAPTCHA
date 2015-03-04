@@ -12,7 +12,7 @@ Google reCAPTCHA implementation for Nette Framework #nette #nettefw
 # Install
 
 ```sh
-$ composer require minetro/recaptcha:1.0.0
+$ composer require minetro/recaptcha:~1.1.0
 ```
 
 ![reCAPTCHA](https://raw.githubusercontent.com/minetro/recaptcha/master/recaptcha.png)
