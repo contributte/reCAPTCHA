@@ -39,5 +39,3 @@ test(function () {
     Assert::false($response->isSuccess());
     Assert::notEqual(NULL, $response->getError());
 });
-
-
