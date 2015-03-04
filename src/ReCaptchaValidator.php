@@ -4,6 +4,7 @@ namespace Minetro\Forms\reCAPTCHA;
 
 use Nette\Forms\Controls\BaseControl;
 use Nette\Http\Url;
+use Nette\Object;
 
 /**
  * reCAPTCHA Validator
@@ -13,14 +14,17 @@ use Nette\Http\Url;
  * @method onValidateControl(ReCaptchaValidator $validator, BaseControl $control)
  * @method onValidate(ReCaptchaValidator $validator, mixed $response)
  */
-final class ReCaptchaValidator
+final class ReCaptchaValidator extends Object
 {
 
-    /** URL */
+    /** GOOGLE URL */
     const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
 
     /** @var array */
     public $onValidate = [];
+
+    /** @var array */
+    public $onValidateControl = [];
 
     /** @var string */
     private $secretKey;
@@ -35,7 +39,7 @@ final class ReCaptchaValidator
 
     /**
      * @param mixed $response
-     * @return ReCaptchaResponse
+     * @return ReCaptchaResponse|FALSE
      */
     public function validate($response)
     {

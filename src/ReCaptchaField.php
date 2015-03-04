@@ -14,6 +14,9 @@ use Nette\Utils\Html;
 final class ReCaptchaField extends HiddenField
 {
 
+    /** Google POST parameter */
+    const GOOGLE_POST_PARAMETER = 'g-recaptcha-response';
+
     /** @var string */
     private $siteKey;
 
@@ -48,15 +51,14 @@ final class ReCaptchaField extends HiddenField
     }
 
     /**
-     * Parse token from g-recaptcha-response
+     * Parse token from given parameters
      *
      * @override
      * @return void
      */
     public function loadHttpData()
     {
-        $value = $this->getForm()->getHttpData(Form::DATA_TEXT, 'g-recaptcha-response');
-
+        $value = $this->getForm()->getHttpData(Form::DATA_TEXT, self::GOOGLE_POST_PARAMETER);
         $this->setValue($value);
     }
 

@@ -50,11 +50,11 @@ final class ReCaptchaResponse
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function __toString()
     {
-        return $this->isSuccess();
+        return (string) $this->isSuccess();
     }
 
 }

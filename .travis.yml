@@ -7,7 +7,7 @@ php:
 
 matrix:
 
-script: ./vendor/bin/tester -p php -s ./tests/reCAPTCHA
+script: ./tests/tester
 
 after_failure:
     # Print *.actual content
@@ -16,5 +16,6 @@ after_failure:
 before_script:
     # Update Composer
     - composer self-update
+
     # Install Nette Tester
     - composer install --no-interaction --dev --prefer-source
