@@ -1,8 +1,8 @@
 {
   "name": "minetro/recaptcha",
-  "type": "library",
   "description": "Google reCAPTCHA for Nette - Forms",
-  "license": "GNU",
+  "type": "library",
+  "license": ["BSD-3-Clause"],
   "homepage": "https://github.com/minetro/reCAPTCHA",
   "authors": [
     {
