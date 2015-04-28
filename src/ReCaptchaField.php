@@ -2,6 +2,7 @@
 
 namespace Minetro\Forms\reCAPTCHA;
 
+use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Controls\HiddenField;
 use Nette\Forms\Form;
 use Nette\Utils\Html;
