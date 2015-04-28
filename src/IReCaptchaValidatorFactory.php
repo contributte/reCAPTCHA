@@ -11,8 +11,7 @@ interface IReCaptchaValidatorFactory
 {
 
     /**
-     * @param string $secretKey
      * @return ReCaptchaValidator
      */
-    function create($secretKey);
+    function create();
 }
