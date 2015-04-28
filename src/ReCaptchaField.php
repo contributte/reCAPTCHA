@@ -62,6 +62,16 @@ final class ReCaptchaField extends HiddenField
         $this->setValue($value);
     }
 
+    /**
+     * Create label
+	 *
+     * @param mixed $caption
+     * @return Html|string
+     */
+    public function getLabel($caption = NULL)
+    {
+        return BaseControl::getLabel($caption);
+    }
 
     /**
      * Create control
