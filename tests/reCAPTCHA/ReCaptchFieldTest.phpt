@@ -7,7 +7,6 @@
 use Minetro\Forms\reCAPTCHA\ReCaptchaField;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Form;
-use Nette\Utils\Html;
 use Tester\Assert;
 
 require __DIR__ . '/../bootstrap.php';
@@ -47,7 +46,8 @@ test(function () {
     $field = new ReCaptchaField();
     $form->addComponent($field, $fieldName);
 
-    Assert::true($field->getControl() instanceof Html);
+    Assert::type('Nette\Utils\Html', $field->getControl());
+    Assert::type('Nette\Utils\Html', $field->getLabel());
     Assert::equal(sprintf(BaseControl::$idMask, $fieldName), $field->getHtmlId());
 });
 
