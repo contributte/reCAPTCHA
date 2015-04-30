@@ -34,8 +34,5 @@ test(function () {
     $key = 'key';
     $validator = new ReCaptchaValidator($key);
 
-    $response = $validator->validateControl(new HiddenMock());
-
-    Assert::false($response->isSuccess());
-    Assert::notEqual(NULL, $response->getError());
+    Assert::false($validator->validateControl(new HiddenMock()));
 });

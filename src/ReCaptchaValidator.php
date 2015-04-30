@@ -72,7 +72,13 @@ final class ReCaptchaValidator extends Object
         // Fire events!
         $this->onValidateControl($this, $control);
 
-        return $this->validate($control->getValue());
+        // Get response
+        $response = $this->validate($control->getValue());
+
+        if ($response) {
+            return $response->isSuccess();
+        } 
+        return FALSE;
     }
 
 
@@ -88,6 +94,8 @@ final class ReCaptchaValidator extends Object
      */
     private function makeRequest($response, $remoteIp = NULL)
     {
+        if (empty($response)) return NULL;
+
         $params = [
             'secret' => $this->secretKey,
             'response' => $response,
