@@ -39,7 +39,7 @@ final class ReCaptchaValidator extends Object
 
     /**
      * @param mixed $response
-     * @return ReCaptchaResponse|FALSE
+     * @return ReCaptchaResponse|bool
      */
     public function validate($response)
     {
