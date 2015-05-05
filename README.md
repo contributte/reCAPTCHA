@@ -7,7 +7,13 @@ reCAPTCHA
 [![Code Climate](https://codeclimate.com/github/minetro/reCAPTCHA/badges/gpa.svg)](https://codeclimate.com/github/minetro/reCAPTCHA)
 [![HHVM Status](https://img.shields.io/hhvm/minetro/reCAPTCHA.svg?style=flat)](http://hhvm.h4cc.de/package/minetro/reCAPTCHA)
 
-Google reCAPTCHA implementation for Nette Framework
+Google reCAPTCHA implementation for Nette Framework.
+
+# Pre-install
+
+Add your site to the sitelist in reCAPTCHA administration.
+
+https://www.google.com/recaptcha/admin#list
 
 # Install
 
@@ -37,7 +43,12 @@ reCAPTCHA.validator:
 reCAPTCHA.holder:
     factory: Minetro\Forms\reCAPTCHA\ReCaptchaHolder::factory(%reCAPTCHA.siteKey%)
     tags: [run]
+    
+reCAPTCHA.binding:
+    factory: Minetro\Forms\reCAPTCHA\ReCaptchaBinding::bind(%reCAPTCHA.siteKey%)
+    tags: [run]
 ```
+
 
 ## Forms
 ```php
