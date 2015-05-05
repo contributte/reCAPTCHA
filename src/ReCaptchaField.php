@@ -12,7 +12,7 @@ use Nette\Utils\Html;
  *
  * @author Milan Felix Sulc <sulcmil@gmail.com>
  */
-final class ReCaptchaField extends HiddenField
+final class ReCaptchaField extends BaseControl
 {
 
     /** Google POST parameter */
@@ -64,17 +64,6 @@ final class ReCaptchaField extends HiddenField
     }
 
     /**
-     * Create label
-	 *
-     * @param mixed $caption
-     * @return Html|string
-     */
-    public function getLabel($caption = NULL)
-    {
-        return BaseControl::getLabel($caption);
-    }
-
-    /**
      * Create control
      *
      * @override
@@ -82,9 +71,7 @@ final class ReCaptchaField extends HiddenField
      */
     public function getControl()
     {
-        $this->setOption('rendered', TRUE);
-
-        $el = clone $this->control;
+        $el = parent::getControl();
         $el->addAttributes([
             'id' => $this->getHtmlId(),
             'name' => $this->getHtmlName(),

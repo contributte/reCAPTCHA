@@ -7,12 +7,12 @@ reCAPTCHA
 [![Code Climate](https://codeclimate.com/github/minetro/reCAPTCHA/badges/gpa.svg)](https://codeclimate.com/github/minetro/reCAPTCHA)
 [![HHVM Status](https://img.shields.io/hhvm/minetro/reCAPTCHA.svg?style=flat)](http://hhvm.h4cc.de/package/minetro/reCAPTCHA)
 
-Google reCAPTCHA implementation for Nette Framework #nette #nettefw
+Google reCAPTCHA implementation for Nette Framework
 
 # Install
 
 ```sh
-$ composer require minetro/recaptcha:~1.0
+$ composer require minetro/recaptcha:~1.4
 ```
 
 ![reCAPTCHA](https://raw.githubusercontent.com/minetro/recaptcha/master/recaptcha.png)
@@ -20,7 +20,7 @@ $ composer require minetro/recaptcha:~1.0
 # Configuration
 
 ## NEON - parameters
-```neon
+```yaml
 # reCAPTCHA
 reCAPTCHA:
     siteKey: ***key**
@@ -28,7 +28,7 @@ reCAPTCHA:
 ```
 
 ## NEON - services
-```neon
+```yaml
 reCAPTCHA.validator:
     class: Minetro\Forms\reCAPTCHA\ReCaptchaValidator
     implement: Minetro\Forms\reCAPTCHA\IReCaptchaValidatorFactory

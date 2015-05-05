@@ -71,7 +71,7 @@ test(function () {
     $field = new ReCaptchaField($key);
     $form->addComponent($field, $fieldName);
 
-    Assert::equal('', $field->getValue());
+    Assert::null($field->getValue());
 
     $field->loadHttpData();
     Assert::equal($field::GOOGLE_POST_PARAMETER, $field->getValue());
