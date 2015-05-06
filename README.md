@@ -25,30 +25,42 @@ $ composer require minetro/recaptcha:~1.4
 
 # Configuration
 
-## NEON - parameters
+## Automatic
+```yaml
+extensions:
+    recaptcha: Minetro\Forms\reCAPTCHA\ReCaptchaExtension
+    
+recaptcha:
+    secretKey: ***
+    siteKey: ***
+```
+## Manual
+
+### NEON - parameters
 ```yaml
 # reCAPTCHA
-reCAPTCHA:
-    siteKey: ***key**
-    secretKey: ***key**
+parameters:
+    reCAPTCHA:
+        siteKey: ***key**
+        secretKey: ***key**
 ```
 
-## NEON - services
+### NEON - services
 ```yaml
-reCAPTCHA.validator:
-    class: Minetro\Forms\reCAPTCHA\ReCaptchaValidator
-    implement: Minetro\Forms\reCAPTCHA\IReCaptchaValidatorFactory
-    arguments: [%reCAPTCHA.secretKey%]
-
-reCAPTCHA.holder:
-    factory: Minetro\Forms\reCAPTCHA\ReCaptchaHolder::factory(%reCAPTCHA.siteKey%)
-    tags: [run]
+services:
+    reCAPTCHA.validator:
+        class: Minetro\Forms\reCAPTCHA\ReCaptchaValidator
+        implement: Minetro\Forms\reCAPTCHA\IReCaptchaValidatorFactory
+        arguments: [%reCAPTCHA.secretKey%]
     
-reCAPTCHA.binding:
-    factory: Minetro\Forms\reCAPTCHA\ReCaptchaBinding::bind(%reCAPTCHA.siteKey%)
-    tags: [run]
+    reCAPTCHA.holder:
+        factory: Minetro\Forms\reCAPTCHA\ReCaptchaHolder::factory(%reCAPTCHA.siteKey%)
+        tags: [run]
 ```
 
+You should call `ReCaptchaBinding::bind(%reCAPTCHA.siteKey%)`, if you want use native `$form->addReCaptcha()` method.
+
+# Usage 
 
 ## Forms
 ```php
