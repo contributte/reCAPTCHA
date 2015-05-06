@@ -46,11 +46,11 @@ class ReCaptchaExtension extends CompilerExtension
         $method = $class->getMethod('initialize');
 
         if ($config['secretKey'] != NULL) {
-            $method->addBody('Minetro\Forms\reCAPTCHA\ReCaptchaBinding::bind(?)', [$config['secretKey']]);
+            $method->addBody('Minetro\Forms\reCAPTCHA\ReCaptchaBinding::bind(?);', [$config['secretKey']]);
         }
 
         if ($config['siteKey'] != NULL) {
-            $method->addBody('Minetro\Forms\reCAPTCHA\ReCaptchaHolder::factory(?)', [$config['siteKey']]);
+            $method->addBody('Minetro\Forms\reCAPTCHA\ReCaptchaHolder::factory(?);', [$config['siteKey']]);
         }
     }
 
