@@ -68,10 +68,12 @@ test(function () {
 
     $fieldName = 'captcha';
     $key = 'key';
-    $field = new ReCaptchaField($key);
+    $label = 'label';
+    $field = new ReCaptchaField($key, $label);
     $form->addComponent($field, $fieldName);
 
     Assert::null($field->getValue());
+    Assert::same($label, $field->caption);
 
     $field->loadHttpData();
     Assert::equal($field::GOOGLE_POST_PARAMETER, $field->getValue());

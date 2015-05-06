@@ -11,7 +11,7 @@ use Nette\PhpGenerator\ClassType;
  *
  * @author Milan Felix Sulc <sulcmil@gmail.com>
  */
-class ReCaptchaExtension extends CompilerExtension
+final class ReCaptchaExtension extends CompilerExtension
 {
 
     /** @var array */
@@ -45,11 +45,8 @@ class ReCaptchaExtension extends CompilerExtension
         $config = $this->validateConfig($this->defaults);
         $method = $class->getMethod('initialize');
 
-        if ($config['secretKey'] != NULL) {
-            $method->addBody('Minetro\Forms\reCAPTCHA\ReCaptchaBinding::bind(?);', [$config['secretKey']]);
-        }
-
         if ($config['siteKey'] != NULL) {
+            $method->addBody('Minetro\Forms\reCAPTCHA\ReCaptchaBinding::bind(?);', [$config['siteKey']]);
             $method->addBody('Minetro\Forms\reCAPTCHA\ReCaptchaHolder::factory(?);', [$config['siteKey']]);
         }
     }

@@ -9,7 +9,7 @@ use Nette\Forms\Container;
  *
  * @author Milan Felix Sulc <sulcmil@gmail.com>
  */
-class ReCaptchaBinding
+final class ReCaptchaBinding
 {
 
     /**
@@ -20,7 +20,7 @@ class ReCaptchaBinding
     public static function bind($siteKey, $name = 'addReCaptcha')
     {
         // Bind to form container
-        Container::extensionMethod($name, function ($container, $name, $label = NULL) use ($siteKey) {
+        Container::extensionMethod($name, function ($container, $name = 'recaptcha', $label = NULL) use ($siteKey) {
             return $container[$name] = new ReCaptchaField($siteKey);
         });
     }

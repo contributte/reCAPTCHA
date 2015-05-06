@@ -12,7 +12,7 @@ use Nette\Utils\Html;
  *
  * @author Milan Felix Sulc <sulcmil@gmail.com>
  */
-final class ReCaptchaField extends BaseControl
+class ReCaptchaField extends BaseControl
 {
 
     /** Google POST parameter */
@@ -23,10 +23,11 @@ final class ReCaptchaField extends BaseControl
 
     /**
      * @param string $siteKey
+     * @param string $label
      */
-    public function __construct($siteKey = NULL)
+    public function __construct($siteKey = NULL, $label = NULL)
     {
-        parent::__construct();
+        parent::__construct($label);
 
         $this->siteKey = $siteKey;
 

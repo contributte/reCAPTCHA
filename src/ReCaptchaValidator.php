@@ -14,7 +14,7 @@ use Nette\Object;
  * @method onValidateControl(ReCaptchaValidator $validator, BaseControl $control)
  * @method onValidate(ReCaptchaValidator $validator, mixed $response)
  */
-final class ReCaptchaValidator extends Object
+class ReCaptchaValidator extends Object
 {
 
     /** GOOGLE URL */
@@ -92,7 +92,7 @@ final class ReCaptchaValidator extends Object
      * @param string $remoteIp
      * @return mixed
      */
-    private function makeRequest($response, $remoteIp = NULL)
+    protected function makeRequest($response, $remoteIp = NULL)
     {
         if (empty($response)) return NULL;
 
@@ -112,7 +112,7 @@ final class ReCaptchaValidator extends Object
      * @param array $parameters
      * @return string
      */
-    private function buildUrl(array $parameters = [])
+    protected function buildUrl(array $parameters = [])
     {
         $url = new Url(self::VERIFICATION_URL);
 
