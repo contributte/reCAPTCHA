@@ -17,8 +17,14 @@ https://www.google.com/recaptcha/admin#list
 
 # Install
 
+## Nette >=2.3
 ```sh
-$ composer require minetro/recaptcha:~1.4
+$ composer require minetro/recaptcha:~1.5.0
+```
+
+## Nette 2.2 
+```sh
+$ composer require minetro/recaptcha:~1.4.0
 ```
 
 ![reCAPTCHA](https://raw.githubusercontent.com/minetro/recaptcha/master/recaptcha.png)
