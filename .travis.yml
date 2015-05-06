@@ -11,11 +11,15 @@ matrix:
         - php: 7.0
 
 script:
-    - vendor/bin/tester tests/reCAPTCHA -s -p php -c tests/php-unix.ini
+    - vendor/bin/tester tests/reCAPTCHA -s $NTESTER_FLAGS -p php
 
 after_failure:
     # Print *.actual content
     - 'for i in $(find tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done'
+
+    # Coveralls
+    - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then composer require satooshi/php-coveralls; fi
+    - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then php vendor/bin/coveralls -c tests/.coveralls.yml -v; fi
 
 before_script:
     # Update Composer
@@ -23,3 +27,8 @@ before_script:
 
     # Install Nette Tester
     - composer install --no-interaction --prefer-source
+
+    # Coveralls
+    - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then cat ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini >> ./tests/php-unix.ini; fi
+    - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then NTESTER_FLAGS="--coverage ./coverage.xml --coverage-src ./src"; else TESTER_FLAGS=""; fi
+
