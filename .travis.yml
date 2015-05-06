@@ -11,7 +11,7 @@ matrix:
         - php: 7.0
 
 script:
-    - vendor/bin/tester tests/reCAPTCHA -s $NTESTER_FLAGS -p php
+    - vendor/bin/tester tests/reCAPTCHA -s -p php -c tests/php-unix.ini $NTESTER_FLAGS
 
 after_failure:
     # Print *.actual content
