@@ -1,11 +1,11 @@
 reCAPTCHA
 ===============
 
-[![Build Status](https://travis-ci.org/minetro/reCAPTCHA.svg?branch=master)](https://travis-ci.org/minetro/reCAPTCHA)
-[![Downloads this Month](https://img.shields.io/packagist/dm/minetro/recaptcha.svg?style=flat)](https://packagist.org/packages/minetro/recaptcha)
-[![Latest stable](https://img.shields.io/packagist/v/minetro/recaptcha.svg?style=flat)](https://packagist.org/packages/minetro/recaptcha)
-[![Code Climate](https://codeclimate.com/github/minetro/reCAPTCHA/badges/gpa.svg)](https://codeclimate.com/github/minetro/reCAPTCHA)
-[![HHVM Status](https://img.shields.io/hhvm/minetro/reCAPTCHA.svg?style=flat)](http://hhvm.h4cc.de/package/minetro/reCAPTCHA)
+[![Build Status](https://img.shields.io/travis/minetro/reCAPTCHA.svg?style=flat-square)](https://travis-ci.org/minetro/reCAPTCHA)
+[![Code coverage](https://img.shields.io/coveralls/minetro/reCAPTCHA.svg?style=flat-square)](https://coveralls.io/r/minetro/reCAPTCHA)
+[![Downloads this Month](https://img.shields.io/packagist/dm/minetro/recaptcha.svg?style=flat-square)](https://packagist.org/packages/minetro/recaptcha)
+[![Latest stable](https://img.shields.io/packagist/v/minetro/recaptcha.svg?style=flat-square)](https://packagist.org/packages/minetro/recaptcha)
+[![HHVM Status](https://img.shields.io/hhvm/minetro/reCAPTCHA.svg?style=flat-square)](http://hhvm.h4cc.de/package/minetro/reCAPTCHA)
 
 Google reCAPTCHA implementation for Nette Framework.
 
