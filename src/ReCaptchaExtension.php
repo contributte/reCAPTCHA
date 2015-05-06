@@ -30,7 +30,7 @@ class ReCaptchaExtension extends CompilerExtension
 
     public function loadConfiguration()
     {
-        $config = $this->getConfig($this->defaults);
+        $config = $this->validateConfig($this->defaults);
         $builder = $this->getContainerBuilder();
 
         $builder->addDefinition($this->prefix('validator'))
@@ -42,7 +42,7 @@ class ReCaptchaExtension extends CompilerExtension
      */
     public function afterCompile(ClassType $class)
     {
-        $config = $this->getConfig($this->defaults);
+        $config = $this->validateConfig($this->defaults);
         $method = $class->getMethod('initialize');
 
         if ($config['secretKey'] != NULL) {
