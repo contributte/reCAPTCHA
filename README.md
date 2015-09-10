@@ -4,6 +4,7 @@ reCAPTCHA
 [![Build Status](https://img.shields.io/travis/minetro/reCAPTCHA.svg?style=flat-square)](https://travis-ci.org/minetro/reCAPTCHA)
 [![Code coverage](https://img.shields.io/coveralls/minetro/reCAPTCHA.svg?style=flat-square)](https://coveralls.io/r/minetro/reCAPTCHA)
 [![Downloads this Month](https://img.shields.io/packagist/dm/minetro/recaptcha.svg?style=flat-square)](https://packagist.org/packages/minetro/recaptcha)
+[![Downloads total](https://img.shields.io/packagist/dt/minetro/recaptcha.svg?style=flat-square)](https://packagist.org/packages/minetro/recaptcha)
 [![Latest stable](https://img.shields.io/packagist/v/minetro/recaptcha.svg?style=flat-square)](https://packagist.org/packages/minetro/recaptcha)
 [![HHVM Status](https://img.shields.io/hhvm/minetro/reCAPTCHA.svg?style=flat-square)](http://hhvm.h4cc.de/package/minetro/reCAPTCHA)
 
