@@ -79,11 +79,13 @@ class MyForm extends Form
 {
 
     /**
+     * @param  string  $name   Field name
+     * @param  string  $label  Html label
      * @return ReCaptchaField
      */
-    public function addReCaptcha($name = 'recaptcha')
+    public function addReCaptcha($name = 'recaptcha', $label = NULL)
     {
-        return $this[$name] = new ReCaptchaField(ReCaptchaHolder::getSiteKey());
+        return $this[$name] = new ReCaptchaField(ReCaptchaHolder::getSiteKey(), $label);
     }
 
 }
@@ -105,7 +107,7 @@ protected function createComponentForm()
 {
     $form = new Form();
     
-    $form['recaptcha'] = $recaptcha = new ReCaptchaField($this->siteKey); 
+    $form['recaptcha'] = $recaptcha = new ReCaptchaField($this->siteKey, $label = NULL); 
     
     $validator = $this->reCaptchaValidatorFactory->create();
     $recaptcha->addRule([$validator, 'validateControl'], 'Vypadá to, že nejste člověk.');
