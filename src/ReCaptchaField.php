@@ -32,7 +32,7 @@ class ReCaptchaField extends BaseControl
         $this->siteKey = $siteKey;
 
         $this->control = Html::el('div');
-        $this->control->addClass('g-recaptcha');
+        $this->control->class('g-recaptcha');
     }
 
     /**

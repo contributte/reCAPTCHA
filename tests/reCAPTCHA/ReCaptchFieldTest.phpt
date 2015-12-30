@@ -32,6 +32,17 @@ test(function () {
 
 test(function () {
     $field = new ReCaptchaField();
+    Assert::equal('g-recaptcha', $field->getControlPrototype()->getClass());
+
+    $field->getControlPrototype()->addClass('foo');
+    Assert::equal(['g-recaptcha', 'foo' => TRUE], $field->getControlPrototype()->getClass());
+
+    $field->getControlPrototype()->class('foobar');
+    Assert::equal('foobar', $field->getControlPrototype()->getClass());
+});
+
+test(function () {
+    $field = new ReCaptchaField();
     Assert::null($field->getSiteKey());
 
     $key = 'key';
