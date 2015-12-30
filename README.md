@@ -154,6 +154,9 @@ use Nette\Application\UI\Form;
 /** @var IReCaptchaValidatorFactory @inject */
 public $reCaptchaValidatorFactory;
 
+/** @var string */
+private $siteKey;
+
 protected function createComponentForm() 
 {
     $form = new Form();
