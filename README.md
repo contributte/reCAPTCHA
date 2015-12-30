@@ -65,11 +65,12 @@ services:
         tags: [run]
 ```
 
-You should call `ReCaptchaBinding::bind(%reCAPTCHA.siteKey%)`, if you want use native `$form->addReCaptcha()` method.
+You should call `ReCaptchaBinding::bind(%reCAPTCHA.siteKey%)`, if you want use native `$form->addReCaptcha()` method standalone.
 
 # Usage 
 
 ## Forms
+
 ```php
 use Minetro\Forms\reCAPTCHA\ReCaptchaField;
 use Minetro\Forms\reCAPTCHA\ReCaptchaHolder;
@@ -91,7 +92,48 @@ class MyForm extends Form
 }
 ```
 
-## Presenter/Control
+```php
+use Minetro\Forms\reCAPTCHA\ReCaptchaField;
+use Minetro\Forms\reCAPTCHA\ReCaptchaHolder;
+use Minetro\Forms\reCAPTCHA\IReCaptchaValidatorFactory;
+use Nette\Application\UI\Form;
+
+class MyAutoForm extends Form
+{
+
+    /** @var IReCaptchaValidatorFactory */
+    private $validatorFactory;
+
+    /**
+     * @param IReCaptchaValidatorFactory $validatorFactory
+     */
+    public function __constructor(IReCaptchaValidatorFactory $validatorFactory) 
+    {
+        $this->validatorFactory = $validatorFactory;
+    }
+
+    /**
+     * @param  string  $name   Field name
+     * @param  string  $label  Html label
+     * @return ReCaptchaField
+     */
+    public function addReCaptcha($name = 'recaptcha', $label = NULL)
+    {
+        $recaptcha = $this[$name] = new ReCaptchaField(ReCaptchaHolder::getSiteKey(), $label);
+
+        $validator = $this->reCaptchaValidatorFactory->create();
+        $recaptcha->addRule([$validator, 'validateControl'], 'You`re bot!');
+
+        return $recaptcha;
+    }
+
+}
+```
+
+`ReCaptchaField` needs google.siteKey in constructor. You could handle it by yourself or use `ReCaptchaHolder::getSiteKey()`.
+
+## Controls
+
 ```php
 use Minetro\Forms\reCAPTCHA\ReCaptchaField;
 use Minetro\Forms\reCAPTCHA\IReCaptchaValidatorFactory;
@@ -101,7 +143,7 @@ use Nette\Application\UI\Form;
 public $reCaptchaValidatorFactory;
 
 /**
- * @return Form
+ * Manually
  */
 protected function createComponentForm() 
 {
@@ -110,9 +152,30 @@ protected function createComponentForm()
     $form['recaptcha'] = $recaptcha = new ReCaptchaField($this->siteKey, $label = NULL); 
     
     $validator = $this->reCaptchaValidatorFactory->create();
-    $recaptcha->addRule([$validator, 'validateControl'], 'Vypadá to, že nejste člověk.');
+    $recaptcha->addRule([$validator, 'validateControl'], 'You`re bot!');
+}
+
+/**
+ * Half-automatic
+ */
+protected function createComponentMyForm() 
+{
+    $form = new MyForm();
     
-    // ...
+    $recaptcha = $form->addReCaptcha($name, $label);
+    
+    $validator = $this->reCaptchaValidatorFactory->create();
+    $recaptcha->addRule([$validator, 'validateControl'], 'You`re bot!');
+}
+
+/**
+ * Full automatic
+ */
+protected function createComponentMyAutoForm() 
+{
+    $form = new MyAutoForm();
+    
+    $form->addReCaptcha($name, $label);
 }
 ```
 
