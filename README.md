@@ -128,11 +128,23 @@ class MyAutoForm extends Form
     }
 
 }
+
+interface IMyAutoFormFactory 
+{
+
+    /**
+     * @return MyAutoForm
+     */
+    public function create();
+
+}
 ```
 
 `ReCaptchaField` needs google.siteKey in constructor. You could handle it by yourself or use `ReCaptchaHolder::getSiteKey()`.
 
 ## Controls
+
+### Manually
 
 ```php
 use Minetro\Forms\reCAPTCHA\ReCaptchaField;
@@ -142,9 +154,6 @@ use Nette\Application\UI\Form;
 /** @var IReCaptchaValidatorFactory @inject */
 public $reCaptchaValidatorFactory;
 
-/**
- * Manually
- */
 protected function createComponentForm() 
 {
     $form = new Form();
@@ -154,10 +163,18 @@ protected function createComponentForm()
     $validator = $this->reCaptchaValidatorFactory->create();
     $recaptcha->addRule([$validator, 'validateControl'], 'You`re bot!');
 }
+```
 
-/**
- * Half-automatic
- */
+### Half automatic
+
+```php
+use Minetro\Forms\reCAPTCHA\ReCaptchaField;
+use Minetro\Forms\reCAPTCHA\IReCaptchaValidatorFactory;
+use Nette\Application\UI\Form;
+
+/** @var IReCaptchaValidatorFactory @inject */
+public $reCaptchaValidatorFactory;
+
 protected function createComponentMyForm() 
 {
     $form = new MyForm();
@@ -167,13 +184,24 @@ protected function createComponentMyForm()
     $validator = $this->reCaptchaValidatorFactory->create();
     $recaptcha->addRule([$validator, 'validateControl'], 'You`re bot!');
 }
+```
 
-/**
- * Full automatic
- */
+### Full automatic
+
+```php
+use Minetro\Forms\reCAPTCHA\ReCaptchaField;
+use Minetro\Forms\reCAPTCHA\IReCaptchaValidatorFactory;
+use Nette\Application\UI\Form;
+
+/** @var IReCaptchaValidatorFactory @inject */
+public $reCaptchaValidatorFactory;
+
+/** @var IMyAutoFormFactory @inject */
+public $myAutoFormFactory;
+
 protected function createComponentMyAutoForm() 
 {
-    $form = new MyAutoForm();
+    $form = $this->myAutoFormFactory->create();
     
     $form->addReCaptcha($name, $label);
 }
