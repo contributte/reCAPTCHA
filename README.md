@@ -210,16 +210,17 @@ protected function createComponentMyAutoForm()
 }
 ```
 
-## Manual rendering
-```smarty
-{form myForm}
+## Rendering
 
+### Manual 
+
+```smarty
+<form n:name="myForm">
 	<div class="form-group">
 		<label n:name="captcha" class="required">Captcha</label>
 		<div n:name="captcha"></div>
 	</div>
-
-{/form}
+</form>
 ```
 
 ## JavaScript
