@@ -1,5 +1,9 @@
-reCAPTCHA
-===============
+# reCAPTCHA
+
+Google reCAPTCHA implementation for Nette Framework.
+
+-----
+
 
 [![Build Status](https://img.shields.io/travis/minetro/reCAPTCHA.svg?style=flat-square)](https://travis-ci.org/minetro/reCAPTCHA)
 [![Code coverage](https://img.shields.io/coveralls/minetro/reCAPTCHA.svg?style=flat-square)](https://coveralls.io/r/minetro/reCAPTCHA)
@@ -8,22 +12,24 @@ reCAPTCHA
 [![Latest stable](https://img.shields.io/packagist/v/minetro/recaptcha.svg?style=flat-square)](https://packagist.org/packages/minetro/recaptcha)
 [![HHVM Status](https://img.shields.io/hhvm/minetro/reCAPTCHA.svg?style=flat-square)](http://hhvm.h4cc.de/package/minetro/reCAPTCHA)
 
-Google reCAPTCHA implementation for Nette Framework.
+## Discussion / Help
 
-# Pre-install
+[![Join the chat at https://gitter.im/Markette/Gopay](https://img.shields.io/gitter/room/minetro/nette.svg?style=flat-square)](https://gitter.im/minetro/nette?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+## Pre-install
 
 Add your site to the sitelist in reCAPTCHA administration.
 
 https://www.google.com/recaptcha/admin#list
 
-# Install
+## Install
 
-## Nette >=2.3
+### Nette >=2.3
 ```sh
 $ composer require minetro/recaptcha:~1.5.0
 ```
 
-## Nette 2.2 
+### Nette 2.2 
 ```sh
 $ composer require minetro/recaptcha:~1.4.0
 ```
@@ -32,7 +38,7 @@ $ composer require minetro/recaptcha:~1.4.0
 
 # Configuration
 
-## Automatic
+### Automatic
 ```yaml
 extensions:
     recaptcha: Minetro\Forms\reCAPTCHA\ReCaptchaExtension
@@ -41,9 +47,9 @@ recaptcha:
     secretKey: ***
     siteKey: ***
 ```
-## Manual
+### Manual
 
-### NEON - parameters
+#### NEON - parameters
 ```yaml
 # reCAPTCHA
 parameters:
@@ -52,7 +58,7 @@ parameters:
         secretKey: ***key**
 ```
 
-### NEON - services
+#### NEON - services
 ```yaml
 services:
     reCAPTCHA.validator:
@@ -67,9 +73,9 @@ services:
 
 You should call `ReCaptchaBinding::bind(%reCAPTCHA.siteKey%)`, if you want use native `$form->addReCaptcha()` method standalone.
 
-# Usage 
+## Usage 
 
-## Forms
+### Forms
 
 ```php
 use Minetro\Forms\reCAPTCHA\ReCaptchaField;
@@ -142,9 +148,9 @@ interface IMyAutoFormFactory
 
 `ReCaptchaField` needs google.siteKey in constructor. You could handle it by yourself or use `ReCaptchaHolder::getSiteKey()`.
 
-## Controls
+### Controls
 
-### Manually
+#### Manually
 
 ```php
 use Minetro\Forms\reCAPTCHA\ReCaptchaField;
@@ -168,7 +174,7 @@ protected function createComponentForm()
 }
 ```
 
-### Half automatic
+#### Half automatic
 
 ```php
 use Minetro\Forms\reCAPTCHA\ReCaptchaField;
@@ -189,7 +195,7 @@ protected function createComponentMyForm()
 }
 ```
 
-### Full automatic
+#### Full automatic
 
 ```php
 use Minetro\Forms\reCAPTCHA\ReCaptchaField;
@@ -210,9 +216,9 @@ protected function createComponentMyAutoForm()
 }
 ```
 
-## Rendering
+### Rendering
 
-### Manual 
+#### Manual 
 
 ```smarty
 <form n:name="myForm">
@@ -223,7 +229,7 @@ protected function createComponentMyAutoForm()
 </form>
 ```
 
-## JavaScript
+### JavaScript
 
 Before `</body>` element.
 
