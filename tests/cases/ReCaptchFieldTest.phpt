@@ -32,10 +32,10 @@ test(function () {
 
 test(function () {
     $field = new ReCaptchaField();
-    Assert::equal('g-recaptcha', $field->getControlPrototype()->getClass());
+    Assert::equal(['g-recaptcha' => TRUE], $field->getControlPrototype()->getClass());
 
     $field->getControlPrototype()->addClass('foo');
-    Assert::equal(['g-recaptcha', 'foo' => TRUE], $field->getControlPrototype()->getClass());
+    Assert::equal(['g-recaptcha' => TRUE, 'foo' => TRUE], $field->getControlPrototype()->getClass());
 
     $field->getControlPrototype()->class('foobar');
     Assert::equal('foobar', $field->getControlPrototype()->getClass());
