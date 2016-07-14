@@ -19,8 +19,6 @@
     "nette/forms": "~2.4.0",
     "nette/utils": "~2.4.0"
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "require-dev": {
     "nette/tester": "~1.7.0"
   },
