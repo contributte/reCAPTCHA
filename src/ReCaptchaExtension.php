@@ -43,7 +43,7 @@ final class ReCaptchaExtension extends CompilerExtension
     public function afterCompile(ClassType $class)
     {
         $config = $this->getConfig($this->defaults);
-        $method = $class->getMethod('initialize');
+        $method = $class->methods['initialize'];
 
         if ($config['siteKey'] != NULL) {
             $method->addBody('Minetro\Forms\reCAPTCHA\ReCaptchaBinding::bind(?);', [$config['siteKey']]);
