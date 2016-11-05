@@ -26,26 +26,27 @@ https://www.google.com/recaptcha/admin#list
 ### Nette ~2.4
 
 ```sh
-$ composer require minetro/recaptcha:~1.7.0
+$ composer require minetro/recaptcha:~1.6.0
 ```
 
 ### Nette ~2.3
 
 ```sh
-$ composer require minetro/recaptcha:~1.6.0
+$ composer require minetro/recaptcha:~1.5.1
 ```
 
 ### Nette 2.2 
 
 ```sh
-$ composer require minetro/recaptcha:~1.4.0
+$ composer require minetro/recaptcha:~1.4.4
 ```
 
 ![reCAPTCHA](https://raw.githubusercontent.com/minetro/recaptcha/master/recaptcha.png)
 
-# Configuration
+## Configuration
 
 ### Automatic
+
 ```yaml
 extensions:
     recaptcha: Minetro\Forms\reCAPTCHA\ReCaptchaExtension
@@ -54,6 +55,7 @@ recaptcha:
     secretKey: ***
     siteKey: ***
 ```
+
 ### Manual
 
 #### NEON - parameters
@@ -66,6 +68,7 @@ parameters:
 ```
 
 #### NEON - services
+
 ```yaml
 services:
     reCAPTCHA.validator:
@@ -78,11 +81,15 @@ services:
         tags: [run]
 ```
 
+#### Forms
+
 You should call `ReCaptchaBinding::bind(%reCAPTCHA.siteKey%)`, if you want use native `$form->addReCaptcha()` method standalone.
 
 ## Usage 
 
-### Forms
+### Automatic
+
+#### Forms
 
 ```php
 use Minetro\Forms\reCAPTCHA\ReCaptchaField;
@@ -155,9 +162,7 @@ interface IMyAutoFormFactory
 
 `ReCaptchaField` needs google.siteKey in constructor. You could handle it by yourself or use `ReCaptchaHolder::getSiteKey()`.
 
-### Controls
-
-#### Manually
+### Manually
 
 ```php
 use Minetro\Forms\reCAPTCHA\ReCaptchaField;
