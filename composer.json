@@ -1,13 +1,14 @@
 {
   "name": "minetro/recaptcha",
   "description": "Google reCAPTCHA for Nette - Forms",
+  "keywords": ["nette", "forms", "captcha", "recaptcha", "google"],
   "type": "library",
   "license": ["BSD-3-Clause"],
   "homepage": "https://github.com/minetro/reCAPTCHA",
   "authors": [
     {
       "name": "Milan Felix Sulc",
-      "homepage": "http://jfx.cz"
+      "homepage": "https://jfx.cz"
     }
   ],
   "suggest": {
@@ -20,14 +21,46 @@
     "nette/utils": "~2.4.0"
   },
   "require-dev": {
-    "nette/tester": "~1.7.0"
+    "nette/tester": "~1.7.0",
+    "ninjify/qa": "^0.2"
   },
   "autoload": {
-    "classmap": ["src/"]
+    "psr-4": {
+      " Minetro\\Forms\\reCAPTCHA\\": "src"
+    }
+  },
+  "scripts": {
+    "qa": [
+      "@qa-codesniffer",
+      "@qa-codefixer",
+      "@qa-linter"
+    ],
+    "qa-codesniffer": [
+      "Ninjify\\Composer\\Script\\CodeSniffer::execute"
+    ],
+    "qa-codefixer": [
+      "Ninjify\\Composer\\Script\\CodeFixer::execute"
+    ],
+    "qa-linter": [
+      "Ninjify\\Composer\\Script\\Linter::execute"
+    ]
   },
   "extra": {
     "branch-alias": {
       "dev-master": "1.7.x-dev"
+    },
+    "ninjify": {
+      "qa": {
+        "codesniffer": {
+          "folders": ["src", "tests"]
+        },
+        "codefixer": {
+          "folders": ["src", "tests"]
+        },
+        "linter": {
+          "folders": ["src", "tests"]
+        }
+      }
     }
   }
 }
