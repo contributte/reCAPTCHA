@@ -7,7 +7,7 @@
   "authors": [
     {
       "name": "Milan Felix Sulc",
-      "homepage": "http://jfx.cz"
+      "homepage": "https://jfx.cz"
     }
   ],
   "suggest": {
@@ -15,16 +15,12 @@
   },
   "require": {
     "php": ">= 5.4",
-    "nette/forms": ">=2.2.0,<2.4.0",
-    "nette/utils": ">=2.2.0,<2.4.0"
+    "nette/nette": "~2.1.0"
   },
   "require-dev": {
-    "nette/tester": "~1.3.0"
+    "nette/tester": "~1.7.0"
   },
   "autoload": {
     "classmap": ["src/"]
-  },
-  "config": {
-    "vendor-dir": "vendor"
   }
 }
