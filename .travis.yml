@@ -10,18 +10,26 @@ matrix:
         - php: hhvm
         - php: hhvm-nightly
 
-before_script:
-    # Update Composer
-    - composer self-update
+    include:
+      - php: 5.6
+        env: COMPOSER_FLAG=--prefer-lowest
+      - php: 5.6
+        env: COMPOSER_FLAG=--prefer-stable
+      - php: 7.0
+        env: COMPOSER_FLAG=--prefer-lowest
+      - php: 7.0
+        env: COMPOSER_FLAG=--prefer-stable
 
-    # Install Nette Tester
-    - composer install --no-interaction --prefer-source
+before_script:
+    # Install composer dependencies
+    - travis_retry composer install --no-interaction --prefer-source
 
     # Coveralls
     - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then cat ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini >> ./tests/php-unix.ini; fi
     - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then NTESTER_FLAGS="--coverage ./coverage.xml --coverage-src ./src"; else TESTER_FLAGS=""; fi
 
 script:
+    - composer run-script qa
     - vendor/bin/tester -p php -i
     - vendor/bin/tester tests/cases -s -p php -c tests/php-unix.ini $NTESTER_FLAGS
 

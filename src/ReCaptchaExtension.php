@@ -2,13 +2,10 @@
 
 namespace Minetro\Forms\reCAPTCHA;
 
-use Nette;
 use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\ClassType;
 
 /**
- * reCAPTCHA Extension
- *
  * @author Milan Felix Sulc <sulcmil@gmail.com>
  */
 final class ReCaptchaExtension extends CompilerExtension
@@ -17,7 +14,7 @@ final class ReCaptchaExtension extends CompilerExtension
     /** @var array */
     private $defaults = [
         'secretKey' => NULL,
-        'siteKey' => NULL
+        'siteKey' => NULL,
     ];
 
     /**
@@ -28,17 +25,22 @@ final class ReCaptchaExtension extends CompilerExtension
         $this->defaults['secretKey'] = $secretKey;
     }
 
+    /**
+     * Register services
+     * @return void
+     */
     public function loadConfiguration()
     {
         $config = $this->validateConfig($this->defaults);
         $builder = $this->getContainerBuilder();
 
         $builder->addDefinition($this->prefix('validator'))
-            ->setClass('Minetro\Forms\reCAPTCHA\ReCaptchaValidator', [$config['secretKey']]);
+            ->setClass(ReCaptchaValidator::class, [$config['secretKey']]);
     }
 
     /**
      * @param ClassType $class
+     * @return void
      */
     public function afterCompile(ClassType $class)
     {
@@ -46,8 +48,8 @@ final class ReCaptchaExtension extends CompilerExtension
         $method = $class->getMethod('initialize');
 
         if ($config['siteKey'] != NULL) {
-            $method->addBody('Minetro\Forms\reCAPTCHA\ReCaptchaBinding::bind(?);', [$config['siteKey']]);
-            $method->addBody('Minetro\Forms\reCAPTCHA\ReCaptchaHolder::factory(?);', [$config['siteKey']]);
+            $method->addBody(sprintf('%s::bind(?);', ReCaptchaBinding::class), [$config['siteKey']]);
+            $method->addBody(sprintf('%::factory(?);', ReCaptchaHolder::class), [$config['siteKey']]);
         }
     }
 

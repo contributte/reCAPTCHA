@@ -7,8 +7,6 @@ use Nette\Http\Url;
 use Nette\Object;
 
 /**
- * reCAPTCHA Validator
- *
  * @author Milan Felix Sulc <sulcmil@gmail.com>
  *
  * @method onValidateControl(ReCaptchaValidator $validator, BaseControl $control)
@@ -17,7 +15,7 @@ use Nette\Object;
 class ReCaptchaValidator extends Object
 {
 
-    /** GOOGLE URL */
+    // GOOGLE URL
     const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
 
     /** @var array */
@@ -32,7 +30,7 @@ class ReCaptchaValidator extends Object
     /**
      * @param string $secretKey
      */
-    function __construct($secretKey)
+    public function __construct($secretKey)
     {
         $this->secretKey = $secretKey;
     }
@@ -77,7 +75,8 @@ class ReCaptchaValidator extends Object
 
         if ($response) {
             return $response->isSuccess();
-        } 
+        }
+
         return FALSE;
     }
 
@@ -120,7 +119,7 @@ class ReCaptchaValidator extends Object
             $url->setQueryParameter($name, $value);
         }
 
-        return (string)$url;
+        return (string) $url;
     }
 
 }

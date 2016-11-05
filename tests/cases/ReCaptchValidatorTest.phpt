@@ -12,6 +12,7 @@ require __DIR__ . '/../bootstrap.php';
 
 final class ControlMock extends BaseControl
 {
+
     public function getValue()
     {
         return 'test';
@@ -20,15 +21,18 @@ final class ControlMock extends BaseControl
 
 final class ValidatorMock extends ReCaptchaValidator
 {
+
     public function makeRequest($response, $remoteIp = NULL)
     {
         parent::makeRequest($response, '127.0.0.0');
+
         return NULL;
     }
 }
 
 final class TrueValidatorMock extends ReCaptchaValidator
 {
+
     public function makeRequest($response, $remoteIp = NULL)
     {
         return json_encode(['success' => TRUE]);

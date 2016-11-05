@@ -3,19 +3,16 @@
 namespace Minetro\Forms\reCAPTCHA;
 
 use Nette\Forms\Controls\BaseControl;
-use Nette\Forms\Controls\HiddenField;
 use Nette\Forms\Form;
 use Nette\Utils\Html;
 
 /**
- * reCAPTCHA Field
- *
  * @author Milan Felix Sulc <sulcmil@gmail.com>
  */
 class ReCaptchaField extends BaseControl
 {
 
-    /** Google POST parameter */
+    // Google POST parameter
     const GOOGLE_POST_PARAMETER = 'g-recaptcha-response';
 
     /** @var string */
@@ -81,6 +78,5 @@ class ReCaptchaField extends BaseControl
 
         return $el;
     }
-
 
 }

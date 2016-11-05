@@ -3,8 +3,6 @@
 namespace Minetro\Forms\reCAPTCHA;
 
 /**
- * reCAPTCHA Validator Factory Interface
- *
  * @author Milan Felix Sulc <sulcmil@gmail.com>
  */
 interface IReCaptchaValidatorFactory
@@ -13,5 +11,6 @@ interface IReCaptchaValidatorFactory
     /**
      * @return ReCaptchaValidator
      */
-    function create();
+    public function create();
+
 }

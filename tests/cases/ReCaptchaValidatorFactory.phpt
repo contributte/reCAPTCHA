@@ -12,6 +12,7 @@ require __DIR__ . '/../bootstrap.php';
 
 final class MockFactory implements IReCaptchaValidatorFactory
 {
+
     /**
      * @return ReCaptchaValidator
      */

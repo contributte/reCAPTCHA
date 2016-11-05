@@ -3,14 +3,12 @@
 namespace Minetro\Forms\reCAPTCHA;
 
 /**
- * reCAPTCHA Response
- *
  * @author Milan Felix Sulc <sulcmil@gmail.com>
  */
 final class ReCaptchaResponse
 {
 
-    /** Error code list */
+    // Error code list
     const ERROR_CODE_MISSING_INPUT_SECRET = 'missing-input-secret';
     const ERROR_CODE_INVALID_INPUT_SECRET = 'invalid-input-secret';
     const ERROR_CODE_MISSING_INPUT_RESPONSE = 'missing-input-response';
@@ -27,9 +25,9 @@ final class ReCaptchaResponse
      * @param bool $success
      * @param string $error
      */
-    function __construct($success, $error = NULL)
+    public function __construct($success, $error = NULL)
     {
-        $this->success = (bool)$success;
+        $this->success = (bool) $success;
         $this->error = $error;
     }
 

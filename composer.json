@@ -32,7 +32,6 @@
   "scripts": {
     "qa": [
       "@qa-codesniffer",
-      "@qa-codefixer",
       "@qa-linter"
     ],
     "qa-codesniffer": [

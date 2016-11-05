@@ -3,8 +3,6 @@
 namespace Minetro\Forms\reCAPTCHA;
 
 /**
- * reCAPTCHA Holder
- *
  * @author Milan Felix Sulc <sulcmil@gmail.com>
  */
 final class ReCaptchaHolder
@@ -37,4 +35,5 @@ final class ReCaptchaHolder
     {
         return new self($siteKey);
     }
+
 }

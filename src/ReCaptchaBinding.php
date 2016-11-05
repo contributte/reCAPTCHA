@@ -5,8 +5,6 @@ namespace Minetro\Forms\reCAPTCHA;
 use Nette\Forms\Container;
 
 /**
- * reCAPTCHA Binding
- *
  * @author Milan Felix Sulc <sulcmil@gmail.com>
  */
 final class ReCaptchaBinding
@@ -24,4 +22,5 @@ final class ReCaptchaBinding
             return $container[$name] = new ReCaptchaField($siteKey);
         });
     }
+
 }

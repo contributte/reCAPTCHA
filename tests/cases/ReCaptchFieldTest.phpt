@@ -13,6 +13,7 @@ require __DIR__ . '/../bootstrap.php';
 
 final class FormMock extends Form
 {
+
     public function getHttpData($type = NULL, $htmlName = NULL)
     {
         return $htmlName;
