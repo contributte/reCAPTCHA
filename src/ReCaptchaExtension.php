@@ -49,7 +49,7 @@ final class ReCaptchaExtension extends CompilerExtension
 
         if ($config['siteKey'] != NULL) {
             $method->addBody(sprintf('%s::bind(?);', ReCaptchaBinding::class), [$config['siteKey']]);
-            $method->addBody(sprintf('%::factory(?);', ReCaptchaHolder::class), [$config['siteKey']]);
+            $method->addBody(sprintf('%s::factory(?);', ReCaptchaHolder::class), [$config['siteKey']]);
         }
     }
 
