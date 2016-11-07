@@ -23,22 +23,28 @@ https://www.google.com/recaptcha/admin#list
 
 ## Install
 
-### Nette ~2.4
+### Nette ~2.4.0
 
 ```sh
-$ composer require minetro/recaptcha:~1.6.0
+$ composer require minetro/recaptcha:^1.6.0
 ```
 
-### Nette ~2.3
+### Nette ~2.3.0
 
 ```sh
-$ composer require minetro/recaptcha:~1.5.1
+$ composer require minetro/recaptcha:^1.5.1
 ```
 
-### Nette 2.2 
+### Nette ~2.2.0 
 
 ```sh
-$ composer require minetro/recaptcha:~1.4.4
+$ composer require minetro/recaptcha:^1.4.4
+```
+
+### Nette ~2.1.0 
+
+```sh
+$ composer require minetro/recaptcha:^1.3.1
 ```
 
 ![reCAPTCHA](https://raw.githubusercontent.com/minetro/recaptcha/master/recaptcha.png)
