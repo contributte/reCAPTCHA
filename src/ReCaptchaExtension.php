@@ -45,9 +45,9 @@ final class ReCaptchaExtension extends CompilerExtension
     public function afterCompile(ClassType $class)
     {
         $config = $this->validateConfig($this->defaults);
-        $method = $class->getMethod('initialize');
 
         if ($config['siteKey'] != NULL) {
+            $method = $class->getMethod('initialize');
             $method->addBody(sprintf('%s::bind(?);', ReCaptchaBinding::class), [$config['siteKey']]);
             $method->addBody(sprintf('%s::factory(?);', ReCaptchaHolder::class), [$config['siteKey']]);
         }

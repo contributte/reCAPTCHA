@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 /**
  * Test: ReCaptchaField
  */
@@ -7,6 +9,7 @@
 use Minetro\Forms\reCAPTCHA\ReCaptchaField;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Form;
+use Nette\Utils\Html;
 use Tester\Assert;
 
 require __DIR__ . '/../bootstrap.php';
@@ -14,14 +17,20 @@ require __DIR__ . '/../bootstrap.php';
 final class FormMock extends Form
 {
 
+    /**
+     * @param string $type
+     * @param string $htmlName
+     * @return mixed
+     */
     public function getHttpData($type = NULL, $htmlName = NULL)
     {
         return $htmlName;
     }
+
 }
 
 test(function () {
-    $field = new ReCaptchaField();
+    $field = new ReCaptchaField(NULL);
     Assert::null($field->getSiteKey());
 });
 
@@ -32,7 +41,7 @@ test(function () {
 });
 
 test(function () {
-    $field = new ReCaptchaField();
+    $field = new ReCaptchaField('foobar');
     Assert::equal(['g-recaptcha' => TRUE], $field->getControlPrototype()->getClass());
 
     $field->getControlPrototype()->addClass('foo');
@@ -43,7 +52,7 @@ test(function () {
 });
 
 test(function () {
-    $field = new ReCaptchaField();
+    $field = new ReCaptchaField(NULL);
     Assert::null($field->getSiteKey());
 
     $key = 'key';
@@ -55,11 +64,11 @@ test(function () {
     $form = new FormMock('form');
 
     $fieldName = 'captcha';
-    $field = new ReCaptchaField();
+    $field = new ReCaptchaField('foobar');
     $form->addComponent($field, $fieldName);
 
-    Assert::type('Nette\Utils\Html', $field->getControl());
-    Assert::type('Nette\Utils\Html', $field->getLabel());
+    Assert::type(Html::class, $field->getControl());
+    Assert::type(Html::class, $field->getLabel());
     Assert::equal(sprintf(BaseControl::$idMask, $fieldName), $field->getHtmlId());
 });
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 /**
  * Test: ReCaptchaValidatorFactory
  */
@@ -16,7 +18,7 @@ final class MockFactory implements IReCaptchaValidatorFactory
     /**
      * @return ReCaptchaValidator
      */
-    function create()
+    public function create()
     {
         return new ReCaptchaValidator(NULL);
     }
@@ -27,5 +29,5 @@ test(function () {
     $factory = new MockFactory();
     $validator = $factory->create();
 
-    Assert::type('Minetro\Forms\reCAPTCHA\ReCaptchaValidator', $validator);
+    Assert::type(ReCaptchaValidator::class, $validator);
 });

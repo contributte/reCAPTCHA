@@ -22,7 +22,7 @@
   },
   "require-dev": {
     "nette/tester": "~1.7.0",
-    "ninjify/qa": "^0.2"
+    "ninjify/qa": "^0.3.0"
   },
   "autoload": {
     "psr-4": {
@@ -31,8 +31,8 @@
   },
   "scripts": {
     "qa": [
-      "@qa-codesniffer",
-      "@qa-linter"
+      "@qa-linter",
+      "@qa-codesniffer"
     ],
     "qa-codesniffer": [
       "Ninjify\\Composer\\Script\\CodeSniffer::execute"
@@ -51,9 +51,11 @@
     "ninjify": {
       "qa": {
         "codesniffer": {
+          "ruleset": "nette",
           "folders": ["src", "tests"]
         },
         "codefixer": {
+          "ruleset": "nette",
           "folders": ["src", "tests"]
         },
         "linter": {

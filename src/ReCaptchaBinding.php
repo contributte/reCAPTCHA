@@ -18,8 +18,8 @@ final class ReCaptchaBinding
     public static function bind($siteKey, $name = 'addReCaptcha')
     {
         // Bind to form container
-        Container::extensionMethod($name, function ($container, $name = 'recaptcha', $label = NULL) use ($siteKey) {
-            return $container[$name] = new ReCaptchaField($siteKey);
+        Container::extensionMethod($name, function ($container, $name, $label = NULL) use ($siteKey) {
+            return $container[$name] = new ReCaptchaField($siteKey, $label);
         });
     }
 

@@ -22,7 +22,7 @@ class ReCaptchaField extends BaseControl
      * @param string $siteKey
      * @param string $label
      */
-    public function __construct($siteKey = NULL, $label = NULL)
+    public function __construct($siteKey, $label = NULL)
     {
         parent::__construct($label);
 

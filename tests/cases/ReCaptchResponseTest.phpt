@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 /**
  * Test: ReCaptchaResponse
  */
@@ -20,7 +22,7 @@ test(function () {
 });
 
 test(function () {
-    $error = "Some error";
+    $error = 'Some error';
     $response = new ReCaptchaResponse(FALSE, $error);
     Assert::false($response->isSuccess());
     Assert::equal($error, $response->getError());

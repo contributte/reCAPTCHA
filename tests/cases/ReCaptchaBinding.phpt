@@ -1,10 +1,13 @@
 <?php
 
+namespace Tests;
+
 /**
  * Test: ReCaptchaBinding
  */
 
 use Minetro\Forms\reCAPTCHA\ReCaptchaBinding;
+use Minetro\Forms\reCAPTCHA\ReCaptchaField;
 use Nette\Forms\Form;
 use Tester\Assert;
 
@@ -15,9 +18,9 @@ test(function () {
     ReCaptchaBinding::bind($siteKey);
 
     $form = new Form();
-    $recaptcha = $form->addReCaptcha();
+    $recaptcha = $form->addReCaptcha('recaptcha');
 
-    Assert::type('Minetro\Forms\reCAPTCHA\ReCaptchaField', $recaptcha);
+    Assert::type(ReCaptchaField::class, $recaptcha);
     Assert::true($form->offsetExists('recaptcha'));
     Assert::same($siteKey, $recaptcha->getSiteKey());
 });
@@ -30,7 +33,7 @@ test(function () {
     $inputName = 'test';
     $recaptcha = $form->addReCaptcha($inputName);
 
-    Assert::type('Minetro\Forms\reCAPTCHA\ReCaptchaField', $recaptcha);
+    Assert::type(ReCaptchaField::class, $recaptcha);
     Assert::true($form->offsetExists($inputName));
     Assert::same($siteKey, $recaptcha->getSiteKey());
 });
