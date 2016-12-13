@@ -27,6 +27,7 @@ final class ReCaptchaExtension extends CompilerExtension
 
     /**
      * Register services
+     *
      * @return void
      */
     public function loadConfiguration()
@@ -39,6 +40,8 @@ final class ReCaptchaExtension extends CompilerExtension
     }
 
     /**
+     * Decorate initialize method
+     *
      * @param ClassType $class
      * @return void
      */
