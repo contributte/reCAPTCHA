@@ -35,6 +35,10 @@ final class ReCaptchaExtension extends CompilerExtension
 
         $builder->addDefinition($this->prefix('validator'))
             ->setClass('Minetro\Forms\reCAPTCHA\ReCaptchaValidator', [$config['secretKey']]);
+
+        $builder->addDefinition($this->prefix('validatorFactory'))
+            ->setImplement('Minetro\Forms\reCAPTCHA\IReCaptchaValidatorFactory')
+            ->setFactory($builder->getDefinition($this->prefix('validator')));
     }
 
     /**
