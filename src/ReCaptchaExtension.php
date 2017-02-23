@@ -37,6 +37,10 @@ final class ReCaptchaExtension extends CompilerExtension
 
         $builder->addDefinition($this->prefix('validator'))
             ->setClass(ReCaptchaValidator::class, [$config['secretKey']]);
+
+        $builder->addDefinition($this->prefix('validatorFactory'))
+            ->setImplement(IReCaptchaValidatorFactory::class)
+            ->setFactory($builder->getDefinition($this->prefix('validator')));
     }
 
     /**
