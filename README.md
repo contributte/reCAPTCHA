@@ -24,16 +24,16 @@ Google reCAPTCHA implementation for [Nette Framework](https://github.com/nette/f
 |--------|------------|------ | -------|
 | master | dev-master | 2.4   | -      |
 | latest | ^2.0.0     | 2.4   | -      |
-| 1.6.x  | ^1.6.3     | 2.4   | [README-1.6](https://github.com/minetro/reCAPTCHA/blob/master/src/.docs/README-1.6.md) |
-| 1.5.x  | ^1.5.2     | 2.3   | [README-1.5](https://github.com/minetro/reCAPTCHA/blob/master/src/.docs/README-1.5.md) |
-| 1.4.x  | ^1.4.4     | 2.2   | [README-1.4](https://github.com/minetro/reCAPTCHA/blob/master/src/.docs/README-1.4.md) |
-| 1.3.x  | ^1.3.0     | 2.1   | [README-1.3](https://github.com/minetro/reCAPTCHA/blob/master/src/.docs/README-1.3.md) |
+| 1.6.x  | ^1.6.3     | 2.4   | [README-1.6](https://github.com/minetro/reCAPTCHA/blob/master/.docs/README-1.6.md) |
+| 1.5.x  | ^1.5.2     | 2.3   | [README-1.5](https://github.com/minetro/reCAPTCHA/blob/master/.docs/README-1.5.md) |
+| 1.4.x  | ^1.4.4     | 2.2   | [README-1.4](https://github.com/minetro/reCAPTCHA/blob/master/.docs/README-1.4.md) |
+| 1.3.x  | ^1.3.0     | 2.1   | [README-1.3](https://github.com/minetro/reCAPTCHA/blob/master/.docs/README-1.3.md) |
 
 ## Pre-installation
 
 Add your site to the sitelist in [reCAPTCHA administration](https://www.google.com/recaptcha/admin#list).
 
-![reCAPTCHA](https://raw.githubusercontent.com/minetro/recaptcha/master/.docs/recaptcha.png)
+![reCAPTCHA](https://rawgit.com/minetro/reCAPTCHA/master/.docs/recaptcha.png)
 
 ## Installation
 
