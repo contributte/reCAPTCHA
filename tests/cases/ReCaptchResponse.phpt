@@ -6,7 +6,7 @@ namespace Tests;
  * Test: ReCaptchaResponse
  */
 
-use Minetro\Forms\reCAPTCHA\ReCaptchaResponse;
+use Minetro\ReCaptcha\ReCaptchaResponse;
 use Tester\Assert;
 
 require __DIR__ . '/../bootstrap.php';

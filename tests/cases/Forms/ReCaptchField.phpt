@@ -6,13 +6,14 @@ namespace Tests;
  * Test: ReCaptchaField
  */
 
-use Minetro\Forms\reCAPTCHA\ReCaptchaField;
+use Minetro\ReCaptcha\Forms\ReCaptchaField;
+use Minetro\ReCaptcha\ReCaptchaProvider;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Form;
 use Nette\Utils\Html;
 use Tester\Assert;
 
-require __DIR__ . '/../bootstrap.php';
+require __DIR__ . '/../../bootstrap.php';
 
 final class FormMock extends Form
 {
@@ -30,18 +31,7 @@ final class FormMock extends Form
 }
 
 test(function () {
-    $field = new ReCaptchaField(NULL);
-    Assert::null($field->getSiteKey());
-});
-
-test(function () {
-    $key = 'key';
-    $field = new ReCaptchaField($key);
-    Assert::equal($key, $field->getSiteKey());
-});
-
-test(function () {
-    $field = new ReCaptchaField('foobar');
+    $field = new ReCaptchaField(new ReCaptchaProvider('foobar', NULL));
     Assert::equal(['g-recaptcha' => TRUE], $field->getControlPrototype()->getClass());
 
     $field->getControlPrototype()->addClass('foo');
@@ -52,19 +42,10 @@ test(function () {
 });
 
 test(function () {
-    $field = new ReCaptchaField(NULL);
-    Assert::null($field->getSiteKey());
-
-    $key = 'key';
-    $field->setSiteKey($key);
-    Assert::equal($key, $field->getSiteKey());
-});
-
-test(function () {
     $form = new FormMock('form');
 
     $fieldName = 'captcha';
-    $field = new ReCaptchaField('foobar');
+    $field = new ReCaptchaField(new ReCaptchaProvider('foobar', NULL));
     $form->addComponent($field, $fieldName);
 
     Assert::type(Html::class, $field->getControl());
@@ -77,10 +58,9 @@ test(function () {
 
     $fieldName = 'captcha';
     $key = 'key';
-    $field = new ReCaptchaField($key);
+    $field = new ReCaptchaField(new ReCaptchaProvider('key', NULL));
     $form->addComponent($field, $fieldName);
 
-    Assert::equal($key, $field->getSiteKey());
     Assert::equal($key, $field->getControl()->{'data-sitekey'});
 });
 
@@ -88,14 +68,13 @@ test(function () {
     $form = new FormMock('form');
 
     $fieldName = 'captcha';
-    $key = 'key';
     $label = 'label';
-    $field = new ReCaptchaField($key, $label);
+    $field = new ReCaptchaField(new ReCaptchaProvider('key', NULL), $label);
     $form->addComponent($field, $fieldName);
 
-    Assert::null($field->getValue());
+    Assert::equal('', $field->getValue());
     Assert::same($label, $field->caption);
 
     $field->loadHttpData();
-    Assert::equal($field::GOOGLE_POST_PARAMETER, $field->getValue());
+    Assert::equal(ReCaptchaProvider::FORM_PARAMETER, $field->getValue());
 });

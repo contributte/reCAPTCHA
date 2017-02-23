@@ -1,21 +1,21 @@
 <?php
 
-namespace Minetro\Forms\reCAPTCHA;
+namespace Minetro\ReCaptcha;
 
 use Nette\Forms\Controls\BaseControl;
-use Nette\Http\Url;
 use Nette\Object;
 
 /**
  * @author Milan Felix Sulc <sulcmil@gmail.com>
  *
- * @method onValidateControl(ReCaptchaValidator $validator, BaseControl $control)
- * @method onValidate(ReCaptchaValidator $validator, mixed $response)
+ * @method onValidateControl(ReCaptchaProvider $provider, BaseControl $control)
+ * @method onValidate(ReCaptchaProvider $provider, mixed $response)
  */
-class ReCaptchaValidator extends Object
+class ReCaptchaProvider extends Object
 {
 
-    // GOOGLE URL
+    // ReCaptcha FTW!
+    const FORM_PARAMETER = 'g-recaptcha-response';
     const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
 
     /** @var array */
@@ -25,19 +25,36 @@ class ReCaptchaValidator extends Object
     public $onValidateControl = [];
 
     /** @var string */
+    private $siteKey;
+
+    /** @var string */
     private $secretKey;
 
     /**
+     * @param string $siteKey
      * @param string $secretKey
      */
-    public function __construct($secretKey)
+    public function __construct($siteKey, $secretKey)
     {
+        $this->siteKey = $siteKey;
         $this->secretKey = $secretKey;
     }
 
     /**
+     * @return string
+     */
+    public function getSiteKey()
+    {
+        return $this->siteKey;
+    }
+
+    /**
+     * VALIDATION **************************************************************
+     */
+
+    /**
      * @param mixed $response
-     * @return ReCaptchaResponse|bool
+     * @return ReCaptchaResponse|FALSE
      */
     public function validate($response)
     {
@@ -83,7 +100,6 @@ class ReCaptchaValidator extends Object
 
     /**
      * HELPERS *****************************************************************
-     * *************************************************************************
      */
 
     /**
@@ -113,13 +129,7 @@ class ReCaptchaValidator extends Object
      */
     protected function buildUrl(array $parameters = [])
     {
-        $url = new Url(self::VERIFICATION_URL);
-
-        foreach ($parameters as $name => $value) {
-            $url->setQueryParameter($name, $value);
-        }
-
-        return (string) $url;
+        return self::VERIFICATION_URL . '?' . http_build_query($parameters);
     }
 
 }

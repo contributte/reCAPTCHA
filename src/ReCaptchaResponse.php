@@ -1,6 +1,6 @@
 <?php
 
-namespace Minetro\Forms\reCAPTCHA;
+namespace Minetro\ReCaptcha;
 
 /**
  * @author Milan Felix Sulc <sulcmil@gmail.com>
