@@ -77,8 +77,7 @@ protected function createComponentForm()
 ```smarty
 <form n:name="myForm">
 	<div class="form-group">
-		<div n:name="recaptcha-image"></div>
-		<div n:name="recaptcha-code"></div>
+		<div n:name="recaptcha"></div>
 	</div>
 </form>
 ```
