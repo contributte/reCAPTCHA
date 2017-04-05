@@ -63,7 +63,7 @@ protected function createComponentForm()
 {
     $form = new Form();
     
-    $form->addReCaptcha('recaptcha')
+    $form->addReCaptcha('recaptcha', NULL, 'This field is required.')
         ->setMessage('Are you bot?');
     
     $form->onSuccess[] = function($form) {
