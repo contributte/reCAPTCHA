@@ -5,6 +5,7 @@ namespace Minetro\ReCaptcha\Forms;
 use Minetro\ReCaptcha\ReCaptchaProvider;
 use Nette\Forms\Controls\TextInput;
 use Nette\Forms\Form;
+use Nette\Forms\Rule;
 use Nette\Utils\Html;
 
 /**
@@ -12,9 +13,13 @@ use Nette\Utils\Html;
  */
 class ReCaptchaField extends TextInput
 {
+    const DEFAULT_MESSAGE = 'Are you bot?';
 
     /** @var ReCaptchaProvider */
     private $provider;
+
+    /** @var Rule */
+    private $reCaptchaRule;
 
     /**
      * @param ReCaptchaProvider $provider
@@ -27,6 +32,11 @@ class ReCaptchaField extends TextInput
 
         $this->control = Html::el('div');
         $this->control->addClass('g-recaptcha');
+        $this->addRule(function ($code) {
+            return $this->verify() === TRUE;
+        }, self::DEFAULT_MESSAGE);
+        $rules = $this->getRules()->getIterator();
+        $this->reCaptchaRule = end($rules);
     }
 
     /**
@@ -45,10 +55,7 @@ class ReCaptchaField extends TextInput
      */
     public function setMessage($message)
     {
-        $this->addRule(function ($code) {
-            return $this->verify() === TRUE;
-        }, $message);
-
+        $this->reCaptchaRule->message = $message;
         return $this;
     }
 
