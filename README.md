@@ -63,8 +63,13 @@ protected function createComponentForm()
 {
     $form = new Form();
     
-    $form->addReCaptcha('recaptcha')
+    $form->addReCaptcha('recaptcha', $label = 'Captcha')
         ->setMessage('Are you bot?');
+    
+    $form->addReCaptcha('recaptcha', $label = 'Captcha', $required = FALSE)
+        ->setMessage('Are you bot?');
+    
+    $form->addReCaptcha('recaptcha', $label = 'Captcha', $required = TRUE, $message = 'Are you bot?');
     
     $form->onSuccess[] = function($form) {
         dump($form->getValues());
