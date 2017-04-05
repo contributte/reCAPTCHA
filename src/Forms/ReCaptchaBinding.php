@@ -19,8 +19,12 @@ final class ReCaptchaBinding
     public static function bind(ReCaptchaProvider $provider, $name = 'addReCaptcha')
     {
         // Bind to form container
-        Container::extensionMethod($name, function ($container, $name = 'recaptcha', $label = NULL) use ($provider) {
-            return $container[$name] = new ReCaptchaField($provider, $label);
+        Container::extensionMethod($name, function ($container, $name = 'recaptcha', $label = 'ReCaptcha', $required = TRUE, $message = NULL) use ($provider) {
+            $field = new ReCaptchaField($provider, $label, $message);
+            $field->setRequired($required);
+            $container[$name] = $field;
+
+            return $container[$name];
         });
     }
 
