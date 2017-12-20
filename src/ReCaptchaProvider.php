@@ -3,7 +3,7 @@
 namespace Minetro\ReCaptcha;
 
 use Nette\Forms\Controls\BaseControl;
-use Nette\Object;
+use Nette\SmartObject;
 
 /**
  * @author Milan Felix Sulc <sulcmil@gmail.com>
@@ -11,8 +11,10 @@ use Nette\Object;
  * @method onValidateControl(ReCaptchaProvider $provider, BaseControl $control)
  * @method onValidate(ReCaptchaProvider $provider, mixed $response)
  */
-class ReCaptchaProvider extends Object
+class ReCaptchaProvider
 {
+
+	use SmartObject;
 
     // ReCaptcha FTW!
     const FORM_PARAMETER = 'g-recaptcha-response';
