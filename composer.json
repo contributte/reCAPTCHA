@@ -1,14 +1,14 @@
 {
-  "name": "minetro/recaptcha",
+  "name": "contributte/recaptcha",
   "description": "Google reCAPTCHA for Nette - Forms",
   "keywords": ["nette", "forms", "captcha", "recaptcha", "google"],
   "type": "library",
-  "license": ["BSD-3-Clause"],
-  "homepage": "https://github.com/minetro/reCAPTCHA",
+  "license": ["MIT"],
+  "homepage": "https://github.com/contributte/reCAPTCHA",
   "authors": [
     {
-      "name": "Milan Felix Sulc",
-      "homepage": "https://jfx.cz"
+      "name": "Milan Felix Šulc",
+      "homepage": "https://f3l1x.io"
     }
   ],
   "suggest": {
@@ -16,64 +16,42 @@
   },
   "require": {
     "php": ">= 5.6",
-    "nette/di": "~2.4.0",
-    "nette/forms": "~2.4.0",
-    "nette/utils": "~2.5.0"
+    "nette/di": "~2.4.11",
+    "nette/forms": "~2.4.7",
+    "nette/utils": "~2.5.1"
   },
   "require-dev": {
-    "ninjify/qa": "^0.3.3",
-    "ninjify/nunjuck": "^0.1.4"
+    "ninjify/qa": "^0.4.0",
+    "ninjify/nunjuck": "^0.2.0"
   },
   "autoload": {
     "psr-4": {
-      "Minetro\\ReCaptcha\\": "src"
+      "Contributte\\ReCaptcha\\": "src"
     }
   },
   "scripts": {
     "qa": [
-      "@qa-linter",
-      "@qa-codesniffer"
+      "linter src tests",
+      "codesniffer src tests"
     ],
-    "qa-codesniffer": [
-      "Ninjify\\Composer\\Script\\CodeSniffer::execute"
+    "tester": [
+      "tester -s -p php --colors 1 -C tests/cases"
     ],
-    "qa-codefixer": [
-      "Ninjify\\Composer\\Script\\CodeFixer::execute"
+    "coverage": [
+      "tester -s -p php --colors 1 -C -d extension=xdebug.so --coverage ./coverage.xml --coverage-src ./src tests/cases"
     ],
-    "qa-linter": [
-      "Ninjify\\Composer\\Script\\Linter::execute"
+    "phpstan-install": [
+      "mkdir -p temp/phpstan",
+      "composer require -d temp/phpstan phpstan/phpstan:0.8.5",
+      "composer require -d temp/phpstan phpstan/phpstan-nette:0.8.3"
     ],
-    "qa-tester": [
-      "nunjuck tests/cases -s -p php -c tests/php-unix.ini"
-    ],
-    "qa-tester-info": [
-      "nunjuck tests/cases -s -p php -c tests/php-unix.ini -i"
-    ],
-    "qa-tester-coverage": [
-      "nunjuck tests/cases -s -p php -c tests/php-unix.ini -d extension=xdebug.so --coverage ./coverage.xml --coverage-src ./src"
-    ],
-    "qa-tester-coverage-info": [
-      "nunjuck tests/cases -s -p php -c tests/php-unix.ini -d extension=xdebug.so --coverage ./coverage.xml --coverage-src ./src -i"
+    "phpstan": [
+      "temp/phpstan/vendor/bin/phpstan analyse -l 1 -c phpstan.neon src"
     ]
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "2.1.x-dev"
-    },
-    "ninjify": {
-      "qa": {
-        "codesniffer": {
-          "ruleset": "nette",
-          "folders": ["src", "tests"]
-        },
-        "codefixer": {
-          "ruleset": "nette",
-          "folders": ["src", "tests"]
-        },
-        "linter": {
-          "folders": ["src", "tests"]
-        }
-      }
+      "dev-develop": "2.2.x-dev"
     }
   }
 }
