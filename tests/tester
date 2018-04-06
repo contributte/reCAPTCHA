@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-sh ../vendor/bin/tester cases -c php-unix.ini -s -j 40 -log tester.log --coverage coverage.html --coverage-src ../src $@
-rm "./tmp" -f -R
