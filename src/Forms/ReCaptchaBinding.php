@@ -1,8 +1,8 @@
 <?php
 
-namespace Minetro\ReCaptcha\Forms;
+namespace Contributte\ReCaptcha\Forms;
 
-use Minetro\ReCaptcha\ReCaptchaProvider;
+use Contributte\ReCaptcha\ReCaptchaProvider;
 use Nette\Forms\Container;
 
 /**
@@ -11,21 +11,21 @@ use Nette\Forms\Container;
 final class ReCaptchaBinding
 {
 
-    /**
-     * @param ReCaptchaProvider $provider
-     * @param string $name
-     * @return void
-     */
-    public static function bind(ReCaptchaProvider $provider, $name = 'addReCaptcha')
-    {
-        // Bind to form container
-        Container::extensionMethod($name, function ($container, $name = 'recaptcha', $label = 'ReCaptcha', $required = TRUE, $message = NULL) use ($provider) {
-            $field = new ReCaptchaField($provider, $label, $message);
-            $field->setRequired($required);
-            $container[$name] = $field;
+	/**
+	 * @param ReCaptchaProvider $provider
+	 * @param string $name
+	 * @return void
+	 */
+	public static function bind(ReCaptchaProvider $provider, $name = 'addReCaptcha')
+	{
+		// Bind to form container
+		Container::extensionMethod($name, function ($container, $name = 'recaptcha', $label = 'ReCaptcha', $required = TRUE, $message = NULL) use ($provider) {
+			$field = new ReCaptchaField($provider, $label, $message);
+			$field->setRequired($required);
+			$container[$name] = $field;
 
-            return $container[$name];
-        });
-    }
+			return $container[$name];
+		});
+	}
 
 }
