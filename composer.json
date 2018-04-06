@@ -24,6 +24,9 @@
     "ninjify/qa": "^0.4.0",
     "ninjify/nunjuck": "^0.2.0"
   },
+  "conflict": {
+    "nette/http": "<2.4.0"
+  },
   "autoload": {
     "psr-4": {
       "Contributte\\ReCaptcha\\": "src"
