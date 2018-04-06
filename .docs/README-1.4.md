@@ -2,10 +2,10 @@
 
 ## Installation
 
-This version is suitable for Nette ~2.2.0
+This version is suitable for Nette 2.2.
 
 ```sh
-$ composer require minetro/recaptcha:^1.4.4
+$ composer require minetro/recaptcha:~1.4.4
 ```
 
 ## Configuration
