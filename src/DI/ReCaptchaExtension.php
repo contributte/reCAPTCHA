@@ -2,6 +2,7 @@
 
 namespace Contributte\ReCaptcha\DI;
 
+use Contributte\ReCaptcha\Forms\InvisibleReCaptchaBinding;
 use Contributte\ReCaptcha\Forms\ReCaptchaBinding;
 use Contributte\ReCaptcha\ReCaptchaProvider;
 use Nette\DI\CompilerExtension;
@@ -34,7 +35,7 @@ final class ReCaptchaExtension extends CompilerExtension
 		Validators::assertField($config, 'secretKey', 'string');
 
 		$builder->addDefinition($this->prefix('provider'))
-			->setClass(ReCaptchaProvider::class, [$config['siteKey'], $config['secretKey']]);
+			->setFactory(ReCaptchaProvider::class, [$config['siteKey'], $config['secretKey']]);
 	}
 
 	/**
@@ -47,6 +48,7 @@ final class ReCaptchaExtension extends CompilerExtension
 	{
 		$method = $class->getMethod('initialize');
 		$method->addBody(sprintf('%s::bind($this->getService(?));', ReCaptchaBinding::class), [$this->prefix('provider')]);
+		$method->addBody(sprintf('%s::bind($this->getService(?));', InvisibleReCaptchaBinding::class), [$this->prefix('provider')]);
 	}
 
 }

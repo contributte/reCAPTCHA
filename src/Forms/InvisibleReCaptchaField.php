@@ -3,15 +3,15 @@
 namespace Contributte\ReCaptcha\Forms;
 
 use Contributte\ReCaptcha\ReCaptchaProvider;
-use Nette\Forms\Controls\TextInput;
+use Nette\Forms\Controls\HiddenField;
 use Nette\Forms\Form;
 use Nette\InvalidStateException;
 use Nette\Utils\Html;
 
 /**
- * @author Milan Felix Sulc <sulcmil@gmail.com>
+ * @author Milan Felix Sulc <sulcmil@gmail.com> | Jan Galek <jan.galek@troia-studio.cz>
  */
-class ReCaptchaField extends TextInput
+class InvisibleReCaptchaField extends HiddenField
 {
 
 	/** @var ReCaptchaProvider */
@@ -22,12 +22,11 @@ class ReCaptchaField extends TextInput
 
 	/**
 	 * @param ReCaptchaProvider $provider
-	 * @param string $label
 	 * @param string $message
 	 */
-	public function __construct(ReCaptchaProvider $provider, $label = NULL, $message = NULL)
+	public function __construct(ReCaptchaProvider $provider, $message = NULL)
 	{
-		parent::__construct($label);
+		parent::__construct();
 		$this->provider = $provider;
 
 		$this->setOmitted(TRUE);
@@ -46,6 +45,7 @@ class ReCaptchaField extends TextInput
 	 */
 	public function loadHttpData()
 	{
+		parent::loadHttpData();
 		$this->setValue($this->getForm()->getHttpData(Form::DATA_TEXT, ReCaptchaProvider::FORM_PARAMETER));
 	}
 
@@ -56,7 +56,7 @@ class ReCaptchaField extends TextInput
 	public function setMessage($message)
 	{
 		if ($this->configured === TRUE) {
-			throw new InvalidStateException('Please call setMessage() only once or don\'t pass $message over addReCaptcha()');
+			throw new InvalidStateException('Please call setMessage() only once or don\'t pass $message over addInvisibleReCaptcha()');
 		}
 
 		$this->addRule(function ($code) {
@@ -79,15 +79,15 @@ class ReCaptchaField extends TextInput
 	/**
 	 * Create control
 	 *
+	 * @param string $caption
 	 * @return Html
 	 */
-	public function getControl()
+	public function getControl($caption = NULL)
 	{
 		$el = parent::getControl();
 		$el->addAttributes([
-			'id' => $this->getHtmlId(),
-			'name' => $this->getHtmlName(),
 			'data-sitekey' => $this->provider->getSiteKey(),
+			'data-size' => 'invisible',
 		]);
 		return $el;
 	}
