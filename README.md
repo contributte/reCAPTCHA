@@ -91,3 +91,39 @@ Be sure you place this script before `</body>` element.
 <!-- re-Captcha -->
 <script src='https://www.google.com/recaptcha/api.js'></script>
 ```
+
+## Invisible
+
+![reCAPTCHA](https://rawgit.com/contributte/reCAPTCHA/master/.docs/invisible-recaptcha.png)
+
+### Usage
+
+```php
+use Nette\Application\UI\Form;
+
+protected function createComponentForm() 
+{
+    $form = new Form();
+    
+    $form->addInvisibleReCaptcha('recaptcha')
+        ->setMessage('Are you bot?');
+    
+    $form->addInvisibleReCaptcha('recaptcha', $required = FALSE)
+        ->setMessage('Are you bot?');
+    
+    $form->addInvisibleReCaptcha('recaptcha', $required = TRUE, $message = 'Are you bot?');
+    
+    $form->onSuccess[] = function($form) {
+        dump($form->getValues());
+    }
+}
+```
+
+Be sure you place this script before `</body>` element.
+
+copy [assets/invisibleRecaptcha.js](/blob/master/assets/invisibleRecaptcha.js) and link it.
+
+```html
+<script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>
+<script src="{$basePath}/assets/invisibleRecaptcha.js"></script>
+```
