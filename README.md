@@ -62,12 +62,12 @@ protected function createComponentForm()
     $form = new Form();
     
     $form->addReCaptcha('recaptcha', $label = 'Captcha')
-        ->setMessage('Are you bot?');
+        ->setMessage('Are you a bot?');
     
     $form->addReCaptcha('recaptcha', $label = 'Captcha', $required = FALSE)
-        ->setMessage('Are you bot?');
+        ->setMessage('Are you a bot?');
     
-    $form->addReCaptcha('recaptcha', $label = 'Captcha', $required = TRUE, $message = 'Are you bot?');
+    $form->addReCaptcha('recaptcha', $label = 'Captcha', $required = TRUE, $message = 'Are you a bot?');
     
     $form->onSuccess[] = function($form) {
         dump($form->getValues());
@@ -85,7 +85,7 @@ protected function createComponentForm()
 </form>
 ```
 
-Be sure you place this script before `</body>` element.
+Be sure to place this script before the closing tag of the `body` element (`</body>`).
 
 ```html
 <!-- re-Captcha -->
@@ -106,12 +106,12 @@ protected function createComponentForm()
     $form = new Form();
     
     $form->addInvisibleReCaptcha('recaptcha')
-        ->setMessage('Are you bot?');
+        ->setMessage('Are you a bot?');
     
     $form->addInvisibleReCaptcha('recaptcha', $required = FALSE)
-        ->setMessage('Are you bot?');
+        ->setMessage('Are you a bot?');
     
-    $form->addInvisibleReCaptcha('recaptcha', $required = TRUE, $message = 'Are you bot?');
+    $form->addInvisibleReCaptcha('recaptcha', $required = TRUE, $message = 'Are you a bot?');
     
     $form->onSuccess[] = function($form) {
         dump($form->getValues());
@@ -119,9 +119,9 @@ protected function createComponentForm()
 }
 ```
 
-Be sure you place this script before `</body>` element.
+Be sure to place this script before the closing tag of the `body` element (`</body>`).
 
-copy [assets/invisibleRecaptcha.js](/blob/master/assets/invisibleRecaptcha.js) and link it.
+Copy [assets/invisibleRecaptcha.js](/blob/master/assets/invisibleRecaptcha.js) and link it.
 
 ```html
 <script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>
