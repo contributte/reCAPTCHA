@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\ReCaptcha;
 
@@ -6,8 +6,6 @@ use Nette\Forms\Controls\BaseControl;
 use Nette\SmartObject;
 
 /**
- * @author Milan Felix Sulc <sulcmil@gmail.com>
- *
  * @method onValidateControl(ReCaptchaProvider $provider, BaseControl $control)
  * @method onValidate(ReCaptchaProvider $provider, mixed $response)
  */
@@ -17,13 +15,13 @@ class ReCaptchaProvider
 	use SmartObject;
 
 	// ReCaptcha FTW!
-	const FORM_PARAMETER = 'g-recaptcha-response';
-	const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
+	public const FORM_PARAMETER = 'g-recaptcha-response';
+	public const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
 
-	/** @var array */
+	/** @var callable[] */
 	public $onValidate = [];
 
-	/** @var array */
+	/** @var callable[] */
 	public $onValidateControl = [];
 
 	/** @var string */
@@ -32,33 +30,21 @@ class ReCaptchaProvider
 	/** @var string */
 	private $secretKey;
 
-	/**
-	 * @param string $siteKey
-	 * @param string $secretKey
-	 */
-	public function __construct($siteKey, $secretKey)
+	public function __construct(string $siteKey, string $secretKey)
 	{
 		$this->siteKey = $siteKey;
 		$this->secretKey = $secretKey;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getSiteKey()
+	public function getSiteKey(): string
 	{
 		return $this->siteKey;
 	}
 
 	/**
-	 * VALIDATION **************************************************************
-	 */
-
-	/**
 	 * @param mixed $response
-	 * @return ReCaptchaResponse|FALSE
 	 */
-	public function validate($response)
+	public function validate($response): ?ReCaptchaResponse
 	{
 		// Fire events!
 		$this->onValidate($this, $response);
@@ -67,24 +53,20 @@ class ReCaptchaProvider
 		$response = $this->makeRequest($response);
 
 		// Response is empty or failed..
-		if (empty($response)) return FALSE;
+		if (empty($response)) return null;
 
 		// Decode server answer (with key assoc reserved)
-		$answer = json_decode($response, TRUE);
+		$answer = json_decode($response, true);
 
 		// Return response
-		if (trim($answer['success']) == TRUE) {
-			return new ReCaptchaResponse(TRUE);
+		if ($answer['success'] === true) {
+			return new ReCaptchaResponse(true);
 		} else {
-			return new ReCaptchaResponse(FALSE, isset($answer['error-codes']) ? $answer['error-codes'] : NULL);
+			return new ReCaptchaResponse(false, $answer['error-codes'] ?? null);
 		}
 	}
 
-	/**
-	 * @param BaseControl $control
-	 * @return bool
-	 */
-	public function validateControl(BaseControl $control)
+	public function validateControl(BaseControl $control): bool
 	{
 		// Fire events!
 		$this->onValidateControl($this, $control);
@@ -92,33 +74,28 @@ class ReCaptchaProvider
 		// Get response
 		$response = $this->validate($control->getValue());
 
-		if ($response) {
+		if ($response !== null) {
 			return $response->isSuccess();
 		}
 
-		return FALSE;
+		return false;
 	}
 
 
 	/**
-	 * HELPERS *****************************************************************
-	 */
-
-	/**
 	 * @param mixed $response
-	 * @param string $remoteIp
 	 * @return mixed
 	 */
-	protected function makeRequest($response, $remoteIp = NULL)
+	protected function makeRequest($response, ?string $remoteIp = null)
 	{
-		if (empty($response)) return NULL;
+		if (empty($response)) return null;
 
 		$params = [
 			'secret' => $this->secretKey,
 			'response' => $response,
 		];
 
-		if ($remoteIp) {
+		if ($remoteIp !== null) {
 			$params['remoteip'] = $remoteIp;
 		}
 
@@ -126,10 +103,9 @@ class ReCaptchaProvider
 	}
 
 	/**
-	 * @param array $parameters
-	 * @return string
+	 * @param mixed[] $parameters
 	 */
-	protected function buildUrl(array $parameters = [])
+	protected function buildUrl(array $parameters = []): string
 	{
 		return self::VERIFICATION_URL . '?' . http_build_query($parameters);
 	}

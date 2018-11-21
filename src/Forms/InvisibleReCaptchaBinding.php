@@ -1,31 +1,22 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\ReCaptcha\Forms;
 
 use Contributte\ReCaptcha\ReCaptchaProvider;
 use Nette\Forms\Container;
 
-/**
- * @author Milan Felix Sulc <sulcmil@gmail.com> | Jan Galek <jan.galek@troia-studio.cz>
- */
 final class InvisibleReCaptchaBinding
 {
 
-	/**
-	 * @param ReCaptchaProvider $provider
-	 * @param string $name
-	 * @return void
-	 */
-	public static function bind(ReCaptchaProvider $provider, $name = 'addInvisibleReCaptcha')
+	public static function bind(ReCaptchaProvider $provider, string $name = 'addInvisibleReCaptcha'): void
 	{
 		// Bind to form container
 
-		Container::extensionMethod($name, function ($container, $name = 'recaptcha', $required = TRUE) use ($provider) {
+		Container::extensionMethod($name, function (Container $container, string $name = 'recaptcha', bool $required = true) use ($provider): InvisibleReCaptchaField {
 			$field = new InvisibleReCaptchaField($provider);
 			$field->setRequired($required);
 			$container[$name] = $field;
-
-			return $container[$name];
+			return $field;
 		});
 	}
 

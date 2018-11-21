@@ -7,10 +7,10 @@ Google reCAPTCHA implementation for [Nette Framework](https://github.com/nette/f
 [![Build Status](https://img.shields.io/travis/contributte/reCAPTCHA.svg?style=flat-square)](https://travis-ci.org/contributte/reCAPTCHA)
 [![Code coverage](https://img.shields.io/coveralls/contributte/reCAPTCHA.svg?style=flat-square)](https://coveralls.io/r/contributte/reCAPTCHA)
 [![Licence](https://img.shields.io/packagist/l/contributte/reCAPTCHA.svg?style=flat-square)](https://packagist.org/packages/contributte/reCAPTCHA)
-
 [![Downloads this Month](https://img.shields.io/packagist/dm/contributte/reCAPTCHA.svg?style=flat-square)](https://packagist.org/packages/contributte/reCAPTCHA)
 [![Downloads total](https://img.shields.io/packagist/dt/contributte/reCAPTCHA.svg?style=flat-square)](https://packagist.org/packages/contributte/reCAPTCHA)
 [![Latest stable](https://img.shields.io/packagist/v/contributte/reCAPTCHA.svg?style=flat-square)](https://packagist.org/packages/contributte/reCAPTCHA)
+[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
 
 ## Discussion / Help
 

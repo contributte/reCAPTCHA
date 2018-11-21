@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace Tests\Forms;
+namespace Tests\Cases\Forms;
 
 /**
  * Test: ReCaptchaBinding
@@ -42,7 +42,7 @@ test(function () {
 	ReCaptchaBinding::bind($provider);
 
 	$form = new Form();
-	$recaptcha = $form->addReCaptcha('recaptcha', 'My label', FALSE);
+	$recaptcha = $form->addReCaptcha('recaptcha', 'My label', false);
 	Assert::false($recaptcha->isRequired());
 });
 
@@ -52,7 +52,7 @@ test(function () {
 	ReCaptchaBinding::bind($provider);
 
 	$form = new Form();
-	$recaptcha = $form->addReCaptcha('recaptcha', 'My label', FALSE, 'Are you bot-bot?');
+	$recaptcha = $form->addReCaptcha('recaptcha', 'My label', false, 'Are you bot-bot?');
 	Assert::false($recaptcha->isRequired());
 	$rules = $recaptcha->getRules()->getIterator();
 	$rule = end($rules);

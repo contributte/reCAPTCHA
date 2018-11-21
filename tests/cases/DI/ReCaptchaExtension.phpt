@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace Tests\DI;
+namespace Tests\Cases\DI;
 
 /**
  * Test: ReCaptchaExtension
@@ -27,7 +27,7 @@ test(function () {
 		]);
 	}, 'SC' . time());
 
-	$container = new $class;
+	$container = new $class();
 	Assert::type(ReCaptchaProvider::class, $container->getByType(ReCaptchaProvider::class));
 	Assert::equal('foobar', $container->getByType(ReCaptchaProvider::class)->getSiteKey());
 });
