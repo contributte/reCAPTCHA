@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace Tests\Forms;
+namespace Tests\Cases\Forms;
 
 /**
  * Test: InvisibleReCaptchaBinding
@@ -32,7 +32,7 @@ test(function () {
 	InvisibleReCaptchaBinding::bind($provider);
 
 	$form = new Form();
-	$recaptcha = $form->addInvisibleReCaptcha('recaptcha', FALSE);
+	$recaptcha = $form->addInvisibleReCaptcha('recaptcha', false);
 	Assert::false($recaptcha->isRequired());
 });
 
@@ -42,6 +42,6 @@ test(function () {
 	InvisibleReCaptchaBinding::bind($provider);
 
 	$form = new Form();
-	$recaptcha = $form->addInvisibleReCaptcha('recaptcha', FALSE, 'Are you bot-bot?');
+	$recaptcha = $form->addInvisibleReCaptcha('recaptcha', false, 'Are you bot-bot?');
 	Assert::false($recaptcha->isRequired());
 });

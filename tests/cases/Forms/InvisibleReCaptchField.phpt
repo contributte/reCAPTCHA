@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace Tests\Forms;
+namespace Tests\Cases\Forms;
 
 /**
  * Test: ReCaptchaField
@@ -23,7 +23,7 @@ final class FormMock extends Form
 	 * @param string $htmlName
 	 * @return mixed
 	 */
-	public function getHttpData($type = NULL, $htmlName = NULL)
+	public function getHttpData($type = null, $htmlName = null)
 	{
 		return $htmlName;
 	}
@@ -31,11 +31,11 @@ final class FormMock extends Form
 }
 
 test(function () {
-	$field = new InvisibleReCaptchaField(new ReCaptchaProvider('foobar', NULL));
-	Assert::equal(['g-recaptcha' => TRUE], $field->getControlPrototype()->getClass());
+	$field = new InvisibleReCaptchaField(new ReCaptchaProvider('foobar', 'secret'));
+	Assert::equal(['g-recaptcha' => true], $field->getControlPrototype()->getClass());
 
 	$field->getControlPrototype()->addClass('foo');
-	Assert::equal(['g-recaptcha' => TRUE, 'foo' => TRUE], $field->getControlPrototype()->getClass());
+	Assert::equal(['g-recaptcha' => true, 'foo' => true], $field->getControlPrototype()->getClass());
 
 	$field->getControlPrototype()->class('foobar');
 	Assert::equal('foobar', $field->getControlPrototype()->getClass());
@@ -45,7 +45,7 @@ test(function () {
 	$form = new FormMock('form');
 
 	$fieldName = 'captcha';
-	$field = new InvisibleReCaptchaField(new ReCaptchaProvider('foobar', NULL));
+	$field = new InvisibleReCaptchaField(new ReCaptchaProvider('foobar', 'secret'));
 	$form->addComponent($field, $fieldName);
 
 	Assert::type(Html::class, $field->getControl());
@@ -57,7 +57,7 @@ test(function () {
 
 	$fieldName = 'captcha';
 	$key = 'key';
-	$field = new InvisibleReCaptchaField(new ReCaptchaProvider('key', NULL));
+	$field = new InvisibleReCaptchaField(new ReCaptchaProvider('key', 'secret'));
 	$form->addComponent($field, $fieldName);
 
 	Assert::equal($key, $field->getControl()->{'data-sitekey'});
@@ -68,7 +68,7 @@ test(function () {
 
 	$fieldName = 'captcha';
 	$label = 'label';
-	$field = new InvisibleReCaptchaField(new ReCaptchaProvider('key', NULL), $label);
+	$field = new InvisibleReCaptchaField(new ReCaptchaProvider('key', 'secret'), $label);
 	$form->addComponent($field, $fieldName);
 
 	Assert::equal('', $field->getValue());

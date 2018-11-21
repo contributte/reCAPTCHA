@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\ReCaptcha\Forms;
 
@@ -8,9 +8,6 @@ use Nette\Forms\Form;
 use Nette\InvalidStateException;
 use Nette\Utils\Html;
 
-/**
- * @author Milan Felix Sulc <sulcmil@gmail.com> | Jan Galek <jan.galek@troia-studio.cz>
- */
 class InvisibleReCaptchaField extends HiddenField
 {
 
@@ -18,71 +15,49 @@ class InvisibleReCaptchaField extends HiddenField
 	private $provider;
 
 	/** @var bool */
-	private $configured = FALSE;
+	private $configured = false;
 
-	/**
-	 * @param ReCaptchaProvider $provider
-	 * @param string $message
-	 */
-	public function __construct(ReCaptchaProvider $provider, $message = NULL)
+	public function __construct(ReCaptchaProvider $provider, ?string $message = null)
 	{
 		parent::__construct();
 		$this->provider = $provider;
 
-		$this->setOmitted(TRUE);
+		$this->setOmitted(true);
 		$this->control = Html::el('div');
 		$this->control->addClass('g-recaptcha');
 
-		if ($message !== NULL) {
+		if ($message !== null) {
 			$this->setMessage($message);
 		}
 	}
 
-	/**
-	 * Parse code from form data
-	 *
-	 * @return void
-	 */
-	public function loadHttpData()
+	public function loadHttpData(): void
 	{
 		parent::loadHttpData();
 		$this->setValue($this->getForm()->getHttpData(Form::DATA_TEXT, ReCaptchaProvider::FORM_PARAMETER));
 	}
 
-	/**
-	 * @param string $message
-	 * @return static
-	 */
-	public function setMessage($message)
+	public function setMessage(string $message): self
 	{
-		if ($this->configured === TRUE) {
+		if ($this->configured === true) {
 			throw new InvalidStateException('Please call setMessage() only once or don\'t pass $message over addInvisibleReCaptcha()');
 		}
 
 		$this->addRule(function ($code) {
-			return $this->verify() === TRUE;
+			return $this->verify() === true;
 		}, $message);
 
-		$this->configured = TRUE;
+		$this->configured = true;
 
 		return $this;
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function verify()
+	public function verify(): bool
 	{
-		return $this->provider->validateControl($this) === TRUE;
+		return $this->provider->validateControl($this) === true;
 	}
 
-	/**
-	 * Create control
-	 *
-	 * @param string $caption
-	 * @return Html
-	 */
-	public function getControl($caption = NULL)
+	public function getControl(?string $caption = null): Html
 	{
 		$el = parent::getControl();
 		$el->addAttributes([

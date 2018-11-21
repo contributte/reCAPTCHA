@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace Tests;
+namespace Tests\Cases;
 
 /**
  * Test: ReCaptchaProvider
@@ -28,25 +28,25 @@ final class ControlMock extends BaseControl
 
 test(function () {
 	$key = 'key';
-	$validator = new ReCaptchaProvider($key, NULL);
+	$validator = new ReCaptchaProvider($key, 'secret');
 
 	$response = $validator->validate('test');
 	Assert::type(ReCaptchaResponse::class, $response);
 
 	Assert::false($response->isSuccess());
-	Assert::notEqual(NULL, $response->getError());
+	Assert::notEqual(null, $response->getError());
 });
 
 test(function () {
 	$key = 'key';
-	$validator = new ReCaptchaProvider($key, NULL);
+	$validator = new ReCaptchaProvider($key, 'secret');
 
 	Assert::false($validator->validateControl(new ControlMock()));
 });
 
 test(function () {
 	$key = 'key';
-	$validator = new ReCaptchaProvider($key, NULL);
+	$validator = new ReCaptchaProvider($key, 'secret');
 
 	Assert::false($validator->validateControl(new ControlMock()));
 });
