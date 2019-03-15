@@ -5,7 +5,7 @@ namespace Contributte\ReCaptcha\Forms;
 use Contributte\ReCaptcha\ReCaptchaProvider;
 use Nette\Forms\Controls\TextInput;
 use Nette\Forms\Form;
-use Nette\InvalidStateException;
+use Nette\Forms\Rules;
 use Nette\Utils\Html;
 
 class ReCaptchaField extends TextInput
@@ -17,6 +17,9 @@ class ReCaptchaField extends TextInput
 	/** @var bool */
 	private $configured = false;
 
+	/** @var string|null */
+	private $message;
+
 	public function __construct(ReCaptchaProvider $provider, ?string $label = null, ?string $message = null)
 	{
 		parent::__construct($label);
@@ -26,9 +29,7 @@ class ReCaptchaField extends TextInput
 		$this->control = Html::el('div');
 		$this->control->addClass('g-recaptcha');
 
-		if ($message !== null) {
-			$this->setMessage($message);
-		}
+		$this->message = $message;
 	}
 
 	public function loadHttpData(): void
@@ -38,17 +39,33 @@ class ReCaptchaField extends TextInput
 
 	public function setMessage(string $message): self
 	{
-		if ($this->configured === true) {
-			throw new InvalidStateException('Please call setMessage() only once or don\'t pass $message over addReCaptcha()');
+		$this->message = $message;
+		return $this;
+	}
+
+	public function validate(): void
+	{
+		$this->configureValidation();
+		parent::validate();
+	}
+
+	public function getRules(): Rules
+	{
+		$this->configureValidation();
+		return parent::getRules();
+	}
+
+	private function configureValidation(): void
+	{
+		if ($this->configured) {
+			return;
 		}
 
+		$message = $this->message ?? 'Are you a bot?';
 		$this->addRule(function ($code) {
 			return $this->verify() === true;
 		}, $message);
-
 		$this->configured = true;
-
-		return $this;
 	}
 
 	public function verify(): bool
@@ -58,6 +75,8 @@ class ReCaptchaField extends TextInput
 
 	public function getControl(): Html
 	{
+		$this->configureValidation();
+
 		$el = parent::getControl();
 		$el->addAttributes([
 			'id' => $this->getHtmlId(),

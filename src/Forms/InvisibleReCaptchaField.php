@@ -5,7 +5,7 @@ namespace Contributte\ReCaptcha\Forms;
 use Contributte\ReCaptcha\ReCaptchaProvider;
 use Nette\Forms\Controls\HiddenField;
 use Nette\Forms\Form;
-use Nette\InvalidStateException;
+use Nette\Forms\Rules;
 use Nette\Utils\Html;
 
 class InvisibleReCaptchaField extends HiddenField
@@ -17,6 +17,9 @@ class InvisibleReCaptchaField extends HiddenField
 	/** @var bool */
 	private $configured = false;
 
+	/** @var string|null */
+	private $message;
+
 	public function __construct(ReCaptchaProvider $provider, ?string $message = null)
 	{
 		parent::__construct();
@@ -26,9 +29,7 @@ class InvisibleReCaptchaField extends HiddenField
 		$this->control = Html::el('div');
 		$this->control->addClass('g-recaptcha');
 
-		if ($message !== null) {
-			$this->setMessage($message);
-		}
+		$this->message = $message;
 	}
 
 	public function loadHttpData(): void
@@ -39,17 +40,33 @@ class InvisibleReCaptchaField extends HiddenField
 
 	public function setMessage(string $message): self
 	{
-		if ($this->configured === true) {
-			throw new InvalidStateException('Please call setMessage() only once or don\'t pass $message over addInvisibleReCaptcha()');
+		$this->message = $message;
+		return $this;
+	}
+
+	public function validate(): void
+	{
+		$this->configureValidation();
+		parent::validate();
+	}
+
+	public function getRules(): Rules
+	{
+		$this->configureValidation();
+		return parent::getRules();
+	}
+
+	private function configureValidation(): void
+	{
+		if ($this->configured) {
+			return;
 		}
 
+		$message = $this->message ?? 'Are you a bot?';
 		$this->addRule(function ($code) {
 			return $this->verify() === true;
 		}, $message);
-
 		$this->configured = true;
-
-		return $this;
 	}
 
 	public function verify(): bool
@@ -59,6 +76,8 @@ class InvisibleReCaptchaField extends HiddenField
 
 	public function getControl(?string $caption = null): Html
 	{
+		$this->configureValidation();
+
 		$el = parent::getControl();
 		$el->addAttributes([
 			'data-sitekey' => $this->provider->getSiteKey(),
