@@ -49,7 +49,7 @@ test(function () {
 	$form->addComponent($field, $fieldName);
 
 	Assert::type(Html::class, $field->getControl());
-	Assert::equal(sprintf(BaseControl::$idMask, $fieldName), $field->getHtmlId());
+	Assert::equal(sprintf(BaseControl::$idMask, $form->getName() . '-' . $fieldName), $field->getHtmlId());
 });
 
 test(function () {
