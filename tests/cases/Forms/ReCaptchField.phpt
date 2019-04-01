@@ -50,7 +50,7 @@ test(function () {
 
 	Assert::type(Html::class, $field->getControl());
 	Assert::type(Html::class, $field->getLabel());
-	Assert::equal(sprintf(BaseControl::$idMask, $fieldName), $field->getHtmlId());
+	Assert::equal(sprintf(BaseControl::$idMask, $form->getName() . '-' . $fieldName), $field->getHtmlId());
 });
 
 test(function () {
