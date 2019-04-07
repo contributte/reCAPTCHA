@@ -19,11 +19,9 @@ final class FormMock extends Form
 {
 
 	/**
-	 * @param string $type
-	 * @param string $htmlName
 	 * @return mixed
 	 */
-	public function getHttpData($type = null, $htmlName = null)
+	public function getHttpData(?int $type = null, ?string $htmlName = null)
 	{
 		return $htmlName;
 	}
