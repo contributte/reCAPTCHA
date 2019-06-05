@@ -53,17 +53,15 @@ class ReCaptchaProvider
 		$response = $this->makeRequest($response);
 
 		// Response is empty or failed..
-		if (empty($response)) return null;
+		if (empty($response)) {
+			return null;
+		}
 
 		// Decode server answer (with key assoc reserved)
 		$answer = json_decode($response, true);
 
 		// Return response
-		if ($answer['success'] === true) {
-			return new ReCaptchaResponse(true);
-		} else {
-			return new ReCaptchaResponse(false, $answer['error-codes'] ?? null);
-		}
+		return $answer['success'] === true ? new ReCaptchaResponse(true) : new ReCaptchaResponse(false, $answer['error-codes'] ?? null);
 	}
 
 	public function validateControl(BaseControl $control): bool
@@ -88,7 +86,9 @@ class ReCaptchaProvider
 	 */
 	protected function makeRequest($response, ?string $remoteIp = null)
 	{
-		if (empty($response)) return null;
+		if (empty($response)) {
+			return null;
+		}
 
 		$params = [
 			'secret' => $this->secretKey,

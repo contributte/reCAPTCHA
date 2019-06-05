@@ -16,6 +16,7 @@ final class InvisibleReCaptchaBinding
 			$field = new InvisibleReCaptchaField($provider);
 			$field->setRequired($required);
 			$container[$name] = $field;
+
 			return $field;
 		});
 	}

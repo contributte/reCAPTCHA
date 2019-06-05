@@ -40,6 +40,7 @@ class ReCaptchaField extends TextInput
 	public function setMessage(string $message): self
 	{
 		$this->message = $message;
+
 		return $this;
 	}
 
@@ -52,6 +53,7 @@ class ReCaptchaField extends TextInput
 	public function getRules(): Rules
 	{
 		$this->configureValidation();
+
 		return parent::getRules();
 	}
 
@@ -83,6 +85,7 @@ class ReCaptchaField extends TextInput
 			'name' => $this->getHtmlName(),
 			'data-sitekey' => $this->provider->getSiteKey(),
 		]);
+
 		return $el;
 	}
 

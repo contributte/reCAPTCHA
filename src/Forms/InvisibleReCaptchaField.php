@@ -41,6 +41,7 @@ class InvisibleReCaptchaField extends HiddenField
 	public function setMessage(string $message): self
 	{
 		$this->message = $message;
+
 		return $this;
 	}
 
@@ -53,6 +54,7 @@ class InvisibleReCaptchaField extends HiddenField
 	public function getRules(): Rules
 	{
 		$this->configureValidation();
+
 		return parent::getRules();
 	}
 
@@ -83,6 +85,7 @@ class InvisibleReCaptchaField extends HiddenField
 			'data-sitekey' => $this->provider->getSiteKey(),
 			'data-size' => 'invisible',
 		]);
+
 		return $el;
 	}
 

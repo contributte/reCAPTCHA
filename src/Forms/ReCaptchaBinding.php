@@ -15,6 +15,7 @@ final class ReCaptchaBinding
 			$field = new ReCaptchaField($provider, $label, $message);
 			$field->setRequired($required);
 			$container[$name] = $field;
+
 			return $field;
 		});
 	}
