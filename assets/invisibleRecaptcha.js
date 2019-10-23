@@ -9,7 +9,12 @@
 				for (var i = 0; i < length; i++) {
 					grecaptcha.render(items[i]);
 				};
-				grecaptcha.execute();
+				grecaptcha.execute().then(function (token) {
+					var inputs = document.getElementsByClassName('g-recaptcha-response');
+					for (var i = 0; i < items.length; i++) {
+						inputs[i].value = token;
+					};
+				});
 			});
 			init = true;
 		}
