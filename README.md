@@ -20,8 +20,8 @@ Google reCAPTCHA implementation for [Nette Framework](https://github.com/nette/f
 
 | Branch | Composer   | Nette | PHP   | Readme |
 |--------|------------|------ | ----- | -------|
-| dev    | ~3.3.0     | 3.0+  | ^7.2 | -      |
-| latest | ~3.2.0     | 3.0+  | ^7.2 | -      |
+| dev    | ~3.4.0     | 3.0+  | ^7.2 | -      |
+| latest | ~3.4.0     | 3.0+  | ^7.2 | -      |
 | 3.x    | ~3.1.0     | 2.4   | ^7.1 | -      |
 | 2.x    | ~2.1.0     | 2.4   | ^5.6 | [README-2.x](https://github.com/contributte/reCAPTCHA/blob/master/.docs/README-2.x.md) |
 | 1.6.x  | ~1.6.3     | 2.4   | ^5.6 | [README-1.6](https://github.com/contributte/reCAPTCHA/blob/master/.docs/README-1.6.md) |
@@ -59,18 +59,18 @@ recaptcha:
 ```php
 use Nette\Application\UI\Form;
 
-protected function createComponentForm() 
+protected function createComponentForm()
 {
     $form = new Form();
-    
+
     $form->addReCaptcha('recaptcha', $label = 'Captcha')
         ->setMessage('Are you a bot?');
-    
+
     $form->addReCaptcha('recaptcha', $label = 'Captcha', $required = FALSE)
         ->setMessage('Are you a bot?');
-    
+
     $form->addReCaptcha('recaptcha', $label = 'Captcha', $required = TRUE, $message = 'Are you a bot?');
-    
+
     $form->onSuccess[] = function($form) {
         dump($form->getValues());
     }
@@ -103,18 +103,18 @@ Be sure to place this script before the closing tag of the `body` element (`</bo
 ```php
 use Nette\Application\UI\Form;
 
-protected function createComponentForm() 
+protected function createComponentForm()
 {
     $form = new Form();
-    
+
     $form->addInvisibleReCaptcha('recaptcha')
         ->setMessage('Are you a bot?');
-    
+
     $form->addInvisibleReCaptcha('recaptcha', $required = FALSE)
         ->setMessage('Are you a bot?');
-    
+
     $form->addInvisibleReCaptcha('recaptcha', $required = TRUE, $message = 'Are you a bot?');
-    
+
     $form->onSuccess[] = function($form) {
         dump($form->getValues());
     }
