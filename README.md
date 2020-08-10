@@ -123,7 +123,7 @@ protected function createComponentForm()
 
 Be sure to place this script before the closing tag of the `body` element (`</body>`).
 
-Copy [assets/invisibleRecaptcha.js](/assets/invisibleRecaptcha.js) and link it.
+Copy [assets/invisibleRecaptcha.js](https://github.com/contributte/reCAPTCHA/blob/master/assets/invisibleRecaptcha.js) and link it.
 
 ```html
 <script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>
