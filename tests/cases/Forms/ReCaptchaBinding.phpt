@@ -55,7 +55,7 @@ test(function () {
 	$recaptcha = $form->addReCaptcha('recaptcha', 'My label', false, 'Are you bot-bot?');
 	Assert::false($recaptcha->isRequired());
 	$rules = $recaptcha->getRules()->getIterator();
-	$rule = end($rules);
+	$rule = $rules[0];
 
 	Assert::equal('Are you bot-bot?', $rule->message);
 });
