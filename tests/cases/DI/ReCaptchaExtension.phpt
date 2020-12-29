@@ -44,5 +44,5 @@ test(function () {
 				],
 			]);
 		}, 'SC2' . time());
-	}, InvalidConfigurationException::class, 'The mandatory option \'captcha › secretKey\' is missing.');
+	}, InvalidConfigurationException::class, 'The mandatory item \'captcha › secretKey\' is missing.');
 });
