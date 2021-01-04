@@ -64,7 +64,7 @@ class ReCaptchaField extends TextInput
 		}
 
 		$message = $this->message ?? 'Are you a bot?';
-		$this->addRule(function ($code) {
+		$this->addRule(function ($code): bool {
 			return $this->verify() === true;
 		}, $message);
 		$this->configured = true;
