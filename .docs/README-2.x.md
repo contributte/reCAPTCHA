@@ -4,8 +4,8 @@
 
 This version is suitable for Nette 2.4.
 
-```sh
-$ composer require minetro/recaptcha:~2.1.1
+```bash
+composer require minetro/recaptcha:~2.1.1
 ```
 
 ## Configuration
@@ -24,18 +24,18 @@ recaptcha:
 ```php
 use Nette\Application\UI\Form;
 
-protected function createComponentForm() 
+protected function createComponentForm()
 {
     $form = new Form();
-    
+
     $form->addReCaptcha('recaptcha', $label = 'Captcha')
         ->setMessage('Are you bot?');
-    
+
     $form->addReCaptcha('recaptcha', $label = 'Captcha', $required = FALSE)
         ->setMessage('Are you bot?');
-    
+
     $form->addReCaptcha('recaptcha', $label = 'Captcha', $required = TRUE, $message = 'Are you bot?');
-    
+
     $form->onSuccess[] = function($form) {
         dump($form->getValues());
     }

@@ -19,7 +19,8 @@ Add your site to the sitelist in [reCAPTCHA administration](https://www.google.c
 
 The latest version is most suitable for **Nette 2.4** and **PHP >=5.6**.
 
-```sh
+```bash
+
 composer require contributte/recaptcha
 ```
 
