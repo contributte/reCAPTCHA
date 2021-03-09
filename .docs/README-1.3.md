@@ -4,8 +4,8 @@
 
 This version is suitable for Nette 2.1.
 
-```sh
-$ composer require minetro/recaptcha:~1.3.1
+```bash
+composer require minetro/recaptcha:~1.3.1
 ```
 
 ## Configuration
@@ -24,7 +24,7 @@ services:
         class: Minetro\Forms\reCAPTCHA\ReCaptchaValidator
         implement: Minetro\Forms\reCAPTCHA\IReCaptchaValidatorFactory
         arguments: [%reCAPTCHA.secretKey%]
-    
+
     reCAPTCHA.holder:
         factory: Minetro\Forms\reCAPTCHA\ReCaptchaHolder::factory(%reCAPTCHA.siteKey%)
         tags: [run]
@@ -43,12 +43,12 @@ public $reCaptchaValidatorFactory;
 /** @var string */
 private $siteKey;
 
-protected function createComponentForm() 
+protected function createComponentForm()
 {
     $form = new Form();
-    
-    $form['recaptcha'] = $recaptcha = new ReCaptchaField($this->siteKey, $label = NULL); 
-    
+
+    $form['recaptcha'] = $recaptcha = new ReCaptchaField($this->siteKey, $label = NULL);
+
     $validator = $this->reCaptchaValidatorFactory->create();
     $recaptcha->addRule([$validator, 'validateControl'], 'You`re bot!');
 }
@@ -56,7 +56,7 @@ protected function createComponentForm()
 
 ## Rendering
 
-```smarty
+```latte
 <form n:name="myForm">
 	<div class="form-group">
 		<label n:name="captcha" class="required">Captcha</label>

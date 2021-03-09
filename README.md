@@ -22,8 +22,8 @@ Website ðŸš€ <a href="https://contributte.org">contributte.org</a> | Contact ðŸ‘
 
 To install latest version of `contributte/recaptcha` use [Composer](https://getcomposer.com).
 
-```
-$ composer require contributte/recaptcha
+```bash
+composer require contributte/recaptcha
 ```
 
 ## Documentation
