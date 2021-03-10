@@ -10,13 +10,13 @@ composer require minetro/recaptcha:~1.6.3
 
 ## Configuration
 
-```yaml
+```neon
 extensions:
-    recaptcha: Minetro\Forms\reCAPTCHA\ReCaptchaExtension
+	recaptcha: Minetro\Forms\reCAPTCHA\ReCaptchaExtension
 
 recaptcha:
-    secretKey: ***
-    siteKey: ***
+	secretKey: ***
+	siteKey: ***
 ```
 
 ## Usage
@@ -34,12 +34,12 @@ private $siteKey;
 
 protected function createComponentForm()
 {
-    $form = new Form();
+	$form = new Form();
 
-    $form['recaptcha'] = $recaptcha = new ReCaptchaField($this->siteKey, $label = NULL);
+	$form['recaptcha'] = $recaptcha = new ReCaptchaField($this->siteKey, $label = NULL);
 
-    $validator = $this->reCaptchaValidatorFactory->create();
-    $recaptcha->addRule([$validator, 'validateControl'], 'You`re bot!');
+	$validator = $this->reCaptchaValidatorFactory->create();
+	$recaptcha->addRule([$validator, 'validateControl'], 'You`re bot!');
 }
 ```
 
@@ -47,10 +47,10 @@ protected function createComponentForm()
 
 ```latte
 <form n:name="myForm">
-	<div class="form-group">
-		<label n:name="captcha" class="required">Captcha</label>
-		<div n:name="captcha"></div>
-	</div>
+    <div class="form-group">
+        <label n:name="captcha" class="required">Captcha</label>
+        <div n:name="captcha"></div>
+    </div>
 </form>
 ```
 

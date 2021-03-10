@@ -10,24 +10,24 @@ composer require minetro/recaptcha:~1.5.2
 
 ## Configuration
 
-```yaml
+```neon
 # reCAPTCHA
 parameters:
-    reCAPTCHA:
-        siteKey: ***key**
-        secretKey: ***key**
+	reCAPTCHA:
+		siteKey: ***key**
+		secretKey: ***key**
 ```
 
-```yaml
+```neon
 services:
-    reCAPTCHA.validator:
-        class: Minetro\Forms\reCAPTCHA\ReCaptchaValidator
-        implement: Minetro\Forms\reCAPTCHA\IReCaptchaValidatorFactory
-        arguments: [%reCAPTCHA.secretKey%]
+	reCAPTCHA.validator:
+		class: Minetro\Forms\reCAPTCHA\ReCaptchaValidator
+		implement: Minetro\Forms\reCAPTCHA\IReCaptchaValidatorFactory
+		arguments: [%reCAPTCHA.secretKey%]
 
-    reCAPTCHA.holder:
-        factory: Minetro\Forms\reCAPTCHA\ReCaptchaHolder::factory(%reCAPTCHA.siteKey%)
-        tags: [run]
+	reCAPTCHA.holder:
+		factory: Minetro\Forms\reCAPTCHA\ReCaptchaHolder::factory(%reCAPTCHA.siteKey%)
+		tags: [run]
 ```
 
 ## Usage
@@ -45,12 +45,12 @@ private $siteKey;
 
 protected function createComponentForm()
 {
-    $form = new Form();
+	$form = new Form();
 
-    $form['recaptcha'] = $recaptcha = new ReCaptchaField($this->siteKey, $label = NULL);
+	$form['recaptcha'] = $recaptcha = new ReCaptchaField($this->siteKey, $label = NULL);
 
-    $validator = $this->reCaptchaValidatorFactory->create();
-    $recaptcha->addRule([$validator, 'validateControl'], 'You`re bot!');
+	$validator = $this->reCaptchaValidatorFactory->create();
+	$recaptcha->addRule([$validator, 'validateControl'], 'You`re bot!');
 }
 ```
 
@@ -58,10 +58,10 @@ protected function createComponentForm()
 
 ```latte
 <form n:name="myForm">
-	<div class="form-group">
-		<label n:name="captcha" class="required">Captcha</label>
-		<div n:name="captcha"></div>
-	</div>
+    <div class="form-group">
+        <label n:name="captcha" class="required">Captcha</label>
+        <div n:name="captcha"></div>
+    </div>
 </form>
 ```
 
