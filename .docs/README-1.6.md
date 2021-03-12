@@ -4,19 +4,19 @@
 
 This version is suitable for Nette 2.4.
 
-```sh
-$ composer require minetro/recaptcha:~1.6.3
+```bash
+composer require minetro/recaptcha:~1.6.3
 ```
 
 ## Configuration
 
-```yaml
+```neon
 extensions:
-    recaptcha: Minetro\Forms\reCAPTCHA\ReCaptchaExtension
+	recaptcha: Minetro\Forms\reCAPTCHA\ReCaptchaExtension
 
 recaptcha:
-    secretKey: ***
-    siteKey: ***
+	secretKey: ***
+	siteKey: ***
 ```
 
 ## Usage
@@ -32,25 +32,25 @@ public $reCaptchaValidatorFactory;
 /** @var string */
 private $siteKey;
 
-protected function createComponentForm() 
+protected function createComponentForm()
 {
-    $form = new Form();
-    
-    $form['recaptcha'] = $recaptcha = new ReCaptchaField($this->siteKey, $label = NULL); 
-    
-    $validator = $this->reCaptchaValidatorFactory->create();
-    $recaptcha->addRule([$validator, 'validateControl'], 'You`re bot!');
+	$form = new Form();
+
+	$form['recaptcha'] = $recaptcha = new ReCaptchaField($this->siteKey, $label = NULL);
+
+	$validator = $this->reCaptchaValidatorFactory->create();
+	$recaptcha->addRule([$validator, 'validateControl'], 'You`re bot!');
 }
 ```
 
 ## Rendering
 
-```smarty
+```latte
 <form n:name="myForm">
-	<div class="form-group">
-		<label n:name="captcha" class="required">Captcha</label>
-		<div n:name="captcha"></div>
-	</div>
+    <div class="form-group">
+        <label n:name="captcha" class="required">Captcha</label>
+        <div n:name="captcha"></div>
+    </div>
 </form>
 ```
 

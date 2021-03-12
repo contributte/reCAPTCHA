@@ -4,19 +4,19 @@
 
 This version is suitable for Nette 2.4.
 
-```sh
-$ composer require minetro/recaptcha:~2.1.1
+```bash
+composer require minetro/recaptcha:~2.1.1
 ```
 
 ## Configuration
 
-```yaml
+```neon
 extensions:
-    recaptcha: Minetro\ReCaptcha\DI\ReCaptchaExtension
+	recaptcha: Minetro\ReCaptcha\DI\ReCaptchaExtension
 
 recaptcha:
-    secretKey: ***
-    siteKey: ***
+	secretKey: ***
+	siteKey: ***
 ```
 
 ## Usage
@@ -24,31 +24,31 @@ recaptcha:
 ```php
 use Nette\Application\UI\Form;
 
-protected function createComponentForm() 
+protected function createComponentForm()
 {
-    $form = new Form();
-    
-    $form->addReCaptcha('recaptcha', $label = 'Captcha')
-        ->setMessage('Are you bot?');
-    
-    $form->addReCaptcha('recaptcha', $label = 'Captcha', $required = FALSE)
-        ->setMessage('Are you bot?');
-    
-    $form->addReCaptcha('recaptcha', $label = 'Captcha', $required = TRUE, $message = 'Are you bot?');
-    
-    $form->onSuccess[] = function($form) {
-        dump($form->getValues());
-    }
+	$form = new Form();
+
+	$form->addReCaptcha('recaptcha', $label = 'Captcha')
+		->setMessage('Are you bot?');
+
+	$form->addReCaptcha('recaptcha', $label = 'Captcha', $required = FALSE)
+		->setMessage('Are you bot?');
+
+	$form->addReCaptcha('recaptcha', $label = 'Captcha', $required = TRUE, $message = 'Are you bot?');
+
+	$form->onSuccess[] = function($form) {
+		dump($form->getValues());
+	}
 }
 ```
 
 ## Rendering
 
-```smarty
+```latte
 <form n:name="myForm">
-	<div class="form-group">
-		<div n:name="recaptcha"></div>
-	</div>
+    <div class="form-group">
+        <div n:name="recaptcha"></div>
+    </div>
 </form>
 ```
 
