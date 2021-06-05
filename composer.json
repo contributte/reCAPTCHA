@@ -1,7 +1,13 @@
 {
   "name": "contributte/recaptcha",
   "description": "Google reCAPTCHA for Nette - Forms",
-  "keywords": ["nette", "forms", "captcha", "recaptcha", "google"],
+  "keywords": [
+    "nette",
+    "forms",
+    "captcha",
+    "recaptcha",
+    "google"
+  ],
   "type": "library",
   "license": "MIT",
   "homepage": "https://github.com/contributte/reCAPTCHA",
