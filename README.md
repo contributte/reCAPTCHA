@@ -35,7 +35,8 @@ For details on how to use this package, check out our [documentation](.docs).
 | State  | Branch | Version    | Nette|PHP   |Readme |
 |--------|--------|------------|------|------|-------|
 | dev    | master | ^3.5.0     | 3.0+ |>=7.2 |-      |
-| stable | 3.x    | ^3.4.0     | 2.4  |>=7.2 |-      |
+| stable | 3.x    | ^3.2.0     | 3.0  |>=7.2 |-      |
+| stable | 3.x    | ^3.1.0     | 2.4  |>=7.2 |-      |
 | stable | 2.x    | ^2.1.0     | 2.4  |^5.6  |[README-2.x](https://github.com/contributte/reCAPTCHA/blob/master/.docs/README-2.x.md) |
 | stable | 1.6.x  | ^1.6.3     | 2.4  |^5.6  |[README-1.6](https://github.com/contributte/reCAPTCHA/blob/master/.docs/README-1.6.md) |
 | stable | 1.5.x  | ^1.5.2     | 2.3  |^5.4  |[README-1.5](https://github.com/contributte/reCAPTCHA/blob/master/.docs/README-1.5.md) |
