@@ -1,3 +1,6 @@
+/**
+ * This code works only for non-ajax forms
+ */
 (function(document, Nette, grecaptcha) {
 	var init = false;
 
@@ -38,10 +41,32 @@
 					if (resolved || e.defaultPrevented) {
 						return;
 					}
-
 					e.preventDefault();
+					grecaptcha.execute();
+				};
+			};
 
-					grecaptcha.execute().then(function (token) {
+			/**
+			 * Try to submit form using first submit button so in backend we can check for `$form[button]->isSubmittedBy()`
+			 * @param {DOMElement} form
+			 * @returns {void}
+			 */
+			var submitForm = function(form) {
+				var btn = form.querySelector('[type=submit]');
+				if (btn) {
+					btn.click();
+				} else {
+					form.submit();
+				}
+			}
+
+			var form;
+			for (var i = 0; i < length; i++) {
+				form = items[i].closest('form');
+				form.addEventListener('submit', submitListenerFactory(form));
+
+				grecaptcha.render(items[i], {
+					callback: function(token) { 
 						resolved = true;
 
 						// reCaptcha token expires after 2 minutes; make it 5 seconds earlier just in case network is slow
@@ -52,17 +77,9 @@
 							inputs[i].value = token;
 						}
 
-						form.submit();
-					});
-				};
-			};
-
-			var form;
-			for (var i = 0; i < length; i++) {
-				grecaptcha.render(items[i]);
-
-				form = items[i].closest('form');
-				form.addEventListener('submit', submitListenerFactory(form));
+						submitForm(form);
+					}
+				});
 			}
 		});
 		init = true;
