@@ -2,26 +2,23 @@
 
 namespace Tests\Cases;
 
-/**
- * Test: ReCaptchaResponse
- */
-
 use Contributte\ReCaptcha\ReCaptchaResponse;
+use Contributte\Tester\Toolkit;
 use Tester\Assert;
 
 require __DIR__ . '/../bootstrap.php';
 
-test(function () {
+Toolkit::test(function () {
 	$response = new ReCaptchaResponse(true);
 	Assert::true($response->isSuccess());
 });
 
-test(function () {
+Toolkit::test(function () {
 	$response = new ReCaptchaResponse(true);
 	Assert::equal('1', (string) $response);
 });
 
-test(function () {
+Toolkit::test(function () {
 	$error = 'Some error';
 	$response = new ReCaptchaResponse(false, $error);
 	Assert::false($response->isSuccess());

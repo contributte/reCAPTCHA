@@ -2,19 +2,16 @@
 
 namespace Tests\Cases\Forms;
 
-/**
- * Test: InvisibleReCaptchaBinding
- */
-
 use Contributte\ReCaptcha\Forms\InvisibleReCaptchaBinding;
 use Contributte\ReCaptcha\Forms\InvisibleReCaptchaField;
 use Contributte\ReCaptcha\ReCaptchaProvider;
+use Contributte\Tester\Toolkit;
 use Nette\Forms\Form;
 use Tester\Assert;
 
 require __DIR__ . '/../../bootstrap.php';
 
-test(function () {
+Toolkit::test(function () {
 	$provider = new ReCaptchaProvider('foo', 'bar');
 	InvisibleReCaptchaBinding::bind($provider);
 
@@ -27,7 +24,7 @@ test(function () {
 	Assert::same('foo', $recaptcha->getControl()->{'data-sitekey'});
 });
 
-test(function () {
+Toolkit::test(function () {
 	$provider = new ReCaptchaProvider('foo', 'bar');
 	InvisibleReCaptchaBinding::bind($provider);
 
@@ -36,8 +33,7 @@ test(function () {
 	Assert::false($recaptcha->isRequired());
 });
 
-
-test(function () {
+Toolkit::test(function () {
 	$provider = new ReCaptchaProvider('foo', 'bar');
 	InvisibleReCaptchaBinding::bind($provider);
 

@@ -8,6 +8,7 @@ namespace Tests\Cases\Forms;
 
 use Contributte\ReCaptcha\Forms\InvisibleReCaptchaField;
 use Contributte\ReCaptcha\ReCaptchaProvider;
+use Contributte\Tester\Toolkit;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Form;
 use Nette\Utils\Html;
@@ -28,7 +29,7 @@ final class FormMock extends Form
 
 }
 
-test(function () {
+Toolkit::test(function () {
 	$field = new InvisibleReCaptchaField(new ReCaptchaProvider('foobar', 'secret'));
 	Assert::equal(['g-recaptcha' => true], $field->getControlPrototype()->getClass());
 
@@ -39,7 +40,7 @@ test(function () {
 	Assert::equal('foobar', $field->getControlPrototype()->getClass());
 });
 
-test(function () {
+Toolkit::test(function () {
 	$form = new FormMock('form');
 
 	$fieldName = 'captcha';
@@ -50,7 +51,7 @@ test(function () {
 	Assert::equal(sprintf(BaseControl::$idMask, $form->getName() . '-' . $fieldName), $field->getHtmlId());
 });
 
-test(function () {
+Toolkit::test(function () {
 	$form = new FormMock('form');
 
 	$fieldName = 'captcha';
@@ -61,7 +62,7 @@ test(function () {
 	Assert::equal($key, $field->getControl()->{'data-sitekey'});
 });
 
-test(function () {
+Toolkit::test(function () {
 	$form = new FormMock('form');
 
 	$fieldName = 'captcha';

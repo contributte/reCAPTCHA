@@ -2,12 +2,9 @@
 
 namespace Tests\Cases;
 
-/**
- * Test: ReCaptchaProvider
- */
-
 use Contributte\ReCaptcha\ReCaptchaProvider;
 use Contributte\ReCaptcha\ReCaptchaResponse;
+use Contributte\Tester\Toolkit;
 use Nette\Forms\Controls\BaseControl;
 use Tester\Assert;
 
@@ -26,7 +23,7 @@ final class ControlMock extends BaseControl
 
 }
 
-test(function () {
+Toolkit::test(function () {
 	$key = 'key';
 	$validator = new ReCaptchaProvider($key, 'secret');
 
@@ -37,14 +34,14 @@ test(function () {
 	Assert::notEqual(null, $response->getError());
 });
 
-test(function () {
+Toolkit::test(function () {
 	$key = 'key';
 	$validator = new ReCaptchaProvider($key, 'secret');
 
 	Assert::false($validator->validateControl(new ControlMock()));
 });
 
-test(function () {
+Toolkit::test(function () {
 	$key = 'key';
 	$validator = new ReCaptchaProvider($key, 'secret');
 
