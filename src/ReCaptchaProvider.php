@@ -39,7 +39,7 @@ class ReCaptchaProvider
 		return $this->siteKey;
 	}
 
-	public function validate(mixed $response): ?ReCaptchaResponse
+	public function validate(string $response): ?ReCaptchaResponse
 	{
 		// Fire events!
 		$this->onValidate($this, $response);
@@ -47,12 +47,13 @@ class ReCaptchaProvider
 		// Load response
 		$response = $this->makeRequest($response);
 
-		// Response is empty or failed..
-		if (empty($response)) {
+		// Response is empty or failed
+		if ($response === null || $response === '') {
 			return null;
 		}
 
 		// Decode server answer (with key assoc reserved)
+		/** @var mixed[] $answer */
 		$answer = json_decode($response, true);
 
 		// Return response
@@ -65,7 +66,9 @@ class ReCaptchaProvider
 		$this->onValidateControl($this, $control);
 
 		// Get response
-		$response = $this->validate($control->getValue());
+		/** @var scalar $value */
+		$value = $control->getValue();
+		$response = $this->validate(strval($value));
 
 		if ($response !== null) {
 			return $response->isSuccess();
@@ -74,9 +77,9 @@ class ReCaptchaProvider
 		return false;
 	}
 
-	protected function makeRequest(mixed $response, ?string $remoteIp = null): mixed
+	protected function makeRequest(?string $response, ?string $remoteIp = null): string|null
 	{
-		if (empty($response)) {
+		if ($response === null || $response === '') {
 			return null;
 		}
 
@@ -89,7 +92,9 @@ class ReCaptchaProvider
 			$params['remoteip'] = $remoteIp;
 		}
 
-		return @file_get_contents($this->buildUrl($params));
+		$content = file_get_contents($this->buildUrl($params));
+
+		return $content === false ? null : $content;
 	}
 
 	/**
