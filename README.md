@@ -32,16 +32,10 @@ For details on how to use this package, check out our [documentation](.docs).
 
 ## Versions
 
-| State  | Branch | Version    | Nette|PHP   |Readme |
-|--------|--------|------------|------|------|-------|
-| dev    | master | ^3.5.0     | 3.0+ |>=7.2 |-      |
-| stable | 3.x    | ^3.2.0     | 3.0  |>=7.2 |-      |
-| stable | 3.x    | ^3.1.0     | 2.4  |>=7.2 |-      |
-| stable | 2.x    | ^2.1.0     | 2.4  |^5.6  |[README-2.x](https://github.com/contributte/reCAPTCHA/blob/master/.docs/README-2.x.md) |
-| stable | 1.6.x  | ^1.6.3     | 2.4  |^5.6  |[README-1.6](https://github.com/contributte/reCAPTCHA/blob/master/.docs/README-1.6.md) |
-| stable | 1.5.x  | ^1.5.2     | 2.3  |^5.4  |[README-1.5](https://github.com/contributte/reCAPTCHA/blob/master/.docs/README-1.5.md) |
-| stable | 1.4.x  | ^1.4.4     | 2.2  |^5.4  |[README-1.4](https://github.com/contributte/reCAPTCHA/blob/master/.docs/README-1.4.md) |
-| stable | 1.3.x  | ^1.3.0     | 2.1  |^5.4  |[README-1.3](https://github.com/contributte/reCAPTCHA/blob/master/.docs/README-1.3.md) |
+| State       | Version | Branch   | Nette  | PHP     |
+|-------------|---------|----------|--------|---------|
+| dev         | `^4.1`  | `master` | `3.1+` | `>=8.1` |
+| stable      | `^4.0`  | `master` | `3.1+` | `>=8.1` |
 
 
 ## Development
