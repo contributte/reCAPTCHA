@@ -19,16 +19,14 @@ class ReCaptchaProvider
 	public const VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify';
 
 	/** @var callable[] */
-	public $onValidate = [];
+	public array $onValidate = [];
 
 	/** @var callable[] */
-	public $onValidateControl = [];
+	public array $onValidateControl = [];
 
-	/** @var string */
-	private $siteKey;
+	private string $siteKey;
 
-	/** @var string */
-	private $secretKey;
+	private string $secretKey;
 
 	public function __construct(string $siteKey, string $secretKey)
 	{
@@ -41,10 +39,7 @@ class ReCaptchaProvider
 		return $this->siteKey;
 	}
 
-	/**
-	 * @param mixed $response
-	 */
-	public function validate($response): ?ReCaptchaResponse
+	public function validate(mixed $response): ?ReCaptchaResponse
 	{
 		// Fire events!
 		$this->onValidate($this, $response);
@@ -79,12 +74,7 @@ class ReCaptchaProvider
 		return false;
 	}
 
-
-	/**
-	 * @param mixed $response
-	 * @return mixed
-	 */
-	protected function makeRequest($response, ?string $remoteIp = null)
+	protected function makeRequest(mixed $response, ?string $remoteIp = null): mixed
 	{
 		if (empty($response)) {
 			return null;

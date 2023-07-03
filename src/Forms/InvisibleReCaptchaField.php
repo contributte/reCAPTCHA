@@ -11,18 +11,16 @@ use Nette\Utils\Html;
 class InvisibleReCaptchaField extends HiddenField
 {
 
-	/** @var ReCaptchaProvider */
-	private $provider;
+	private ReCaptchaProvider $provider;
 
-	/** @var bool */
-	private $configured = false;
+	private bool $configured = false;
 
-	/** @var string|null */
-	private $message;
+	private ?string $message = null;
 
 	public function __construct(ReCaptchaProvider $provider, ?string $message = null)
 	{
 		parent::__construct();
+
 		$this->provider = $provider;
 
 		$this->setOmitted(true);
@@ -35,6 +33,7 @@ class InvisibleReCaptchaField extends HiddenField
 	public function loadHttpData(): void
 	{
 		parent::loadHttpData();
+
 		$this->setValue($this->getForm()->getHttpData(Form::DATA_TEXT, ReCaptchaProvider::FORM_PARAMETER));
 	}
 
@@ -48,6 +47,7 @@ class InvisibleReCaptchaField extends HiddenField
 	public function validate(): void
 	{
 		$this->configureValidation();
+
 		parent::validate();
 	}
 
@@ -56,19 +56,6 @@ class InvisibleReCaptchaField extends HiddenField
 		$this->configureValidation();
 
 		return parent::getRules();
-	}
-
-	private function configureValidation(): void
-	{
-		if ($this->configured) {
-			return;
-		}
-
-		$message = $this->message ?? 'Are you a bot?';
-		$this->addRule(function ($code): bool {
-			return $this->verify() === true;
-		}, $message);
-		$this->configured = true;
 	}
 
 	public function verify(): bool
@@ -87,6 +74,17 @@ class InvisibleReCaptchaField extends HiddenField
 		]);
 
 		return $el;
+	}
+
+	private function configureValidation(): void
+	{
+		if ($this->configured) {
+			return;
+		}
+
+		$message = $this->message ?? 'Are you a bot?';
+		$this->addRule(fn ($code): bool => $this->verify() === true, $message);
+		$this->configured = true;
 	}
 
 }

@@ -12,16 +12,15 @@ final class ReCaptchaResponse
 	public const ERROR_CODE_INVALID_INPUT_RESPONSE = 'invalid-input-response';
 	public const ERROR_CODE_UNKNOWN = 'unknow';
 
-	/** @var bool */
-	private $success;
+	private bool $success;
 
 	/** @var string[]|string|null */
-	private $error;
+	private array|string|null $error = null;
 
 	/**
 	 * @param string[]|string|null $error
 	 */
-	public function __construct(bool $success, $error = null)
+	public function __construct(bool $success, array|string|null $error = null)
 	{
 		$this->success = $success;
 		$this->error = $error;
@@ -35,7 +34,7 @@ final class ReCaptchaResponse
 	/**
 	 * @return string[]|string|null
 	 */
-	public function getError()
+	public function getError(): array|string|null
 	{
 		return $this->error;
 	}

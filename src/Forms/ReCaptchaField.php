@@ -11,18 +11,16 @@ use Nette\Utils\Html;
 class ReCaptchaField extends TextInput
 {
 
-	/** @var ReCaptchaProvider */
-	private $provider;
+	private ReCaptchaProvider $provider;
 
-	/** @var bool */
-	private $configured = false;
+	private bool $configured = false;
 
-	/** @var string|null */
-	private $message;
+	private ?string $message = null;
 
 	public function __construct(ReCaptchaProvider $provider, ?string $label = null, ?string $message = null)
 	{
 		parent::__construct($label);
+
 		$this->provider = $provider;
 
 		$this->setOmitted(true);
@@ -47,6 +45,7 @@ class ReCaptchaField extends TextInput
 	public function validate(): void
 	{
 		$this->configureValidation();
+
 		parent::validate();
 	}
 
@@ -55,19 +54,6 @@ class ReCaptchaField extends TextInput
 		$this->configureValidation();
 
 		return parent::getRules();
-	}
-
-	private function configureValidation(): void
-	{
-		if ($this->configured) {
-			return;
-		}
-
-		$this->configured = true;
-		$message = $this->message ?? 'Are you a bot?';
-		$this->addRule(function ($code): bool {
-			return $this->verify() === true;
-		}, $message);
 	}
 
 	public function verify(): bool
@@ -87,6 +73,17 @@ class ReCaptchaField extends TextInput
 		]);
 
 		return $el;
+	}
+
+	private function configureValidation(): void
+	{
+		if ($this->configured) {
+			return;
+		}
+
+		$this->configured = true;
+		$message = $this->message ?? 'Are you a bot?';
+		$this->addRule(fn ($code): bool => $this->verify() === true, $message);
 	}
 
 }
