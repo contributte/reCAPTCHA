@@ -18,6 +18,7 @@ final class ReCaptchaExtension extends CompilerExtension
 		return Expect::structure([
 			'siteKey' => Expect::string()->required(),
 			'secretKey' => Expect::string()->required(),
+			'minimalScore' => Expect::anyOf(Expect::float()->min(0)->max(1), Expect::int()->min(0)->max(1))->default(0),
 		]);
 	}
 
@@ -30,7 +31,7 @@ final class ReCaptchaExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('provider'))
-			->setFactory(ReCaptchaProvider::class, [$config['siteKey'], $config['secretKey']]);
+			->setFactory(ReCaptchaProvider::class, [$config['siteKey'], $config['secretKey'], $config['minimalScore']]);
 	}
 
 	/**

@@ -28,10 +28,14 @@ class ReCaptchaProvider
 
 	private string $secretKey;
 
-	public function __construct(string $siteKey, string $secretKey)
+	// Range 0..1 (1.0 is very likely a good interaction, 0.0 is very likely a bot)
+	private float $minimalScore;
+
+	public function __construct(string $siteKey, string $secretKey, float $minimalScore)
 	{
 		$this->siteKey = $siteKey;
 		$this->secretKey = $secretKey;
+		$this->setMinimalScore($minimalScore);
 	}
 
 	public function getSiteKey(): string
@@ -57,7 +61,7 @@ class ReCaptchaProvider
 		$answer = json_decode($response, true);
 
 		// Return response
-		return $answer['success'] === true ? new ReCaptchaResponse(true) : new ReCaptchaResponse(false, $answer['error-codes'] ?? null);
+		return $answer['success'] === true && $answer['score'] >= $this->minimalScore ? new ReCaptchaResponse(true) : new ReCaptchaResponse(false, $answer['error-codes'] ?? null);
 	}
 
 	public function validateControl(BaseControl $control): bool
@@ -75,6 +79,11 @@ class ReCaptchaProvider
 		}
 
 		return false;
+	}
+
+	public function setMinimalScore(float $score): void
+	{
+		$this->minimalScore = $score;
 	}
 
 	protected function makeRequest(?string $response, ?string $remoteIp = null): string|null
