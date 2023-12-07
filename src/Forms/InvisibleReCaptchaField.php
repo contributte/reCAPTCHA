@@ -50,7 +50,7 @@ class InvisibleReCaptchaField extends HiddenField
 	public function setMinimalScore(float $score): self
 	{
 		if ($score < 0 || $score > 1) {
-			throw new InvalidScoreException('Minimal score expects to be in range 0..1 (1.0 is very likely a good interaction, 0.0 is very likely a bot).');
+			throw new \LogicException('Minimal score expects to be in range 0..1 (1.0 is very likely a good interaction, 0.0 is very likely a bot).');
 		}
 
 		$this->provider->setMinimalScore($score);
