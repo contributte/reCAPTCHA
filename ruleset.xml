@@ -10,6 +10,10 @@
 				<element key="src" value="Contributte\ReCaptcha"/>
 				<element key="tests" value="Tests"/>
 			</property>
+			<property name="extensions" type="array">
+				<element key="php" value="php"/>
+				<element key="phpt" value="phpt"/>
+			</property>
 		</properties>
 	</rule>
 
