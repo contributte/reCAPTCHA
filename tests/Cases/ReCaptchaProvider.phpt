@@ -13,17 +13,14 @@ require __DIR__ . '/../bootstrap.php';
 final class ControlMock extends BaseControl
 {
 
-	/**
-	 * @return string
-	 */
-	public function getValue()
+	public function getValue(): string
 	{
 		return 'test';
 	}
 
 }
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$key = 'key';
 	$validator = new ReCaptchaProvider($key, 'secret');
 
@@ -34,14 +31,14 @@ Toolkit::test(function () {
 	Assert::notEqual(null, $response->getError());
 });
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$key = 'key';
 	$validator = new ReCaptchaProvider($key, 'secret');
 
 	Assert::false($validator->validateControl(new ControlMock()));
 });
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$key = 'key';
 	$validator = new ReCaptchaProvider($key, 'secret');
 

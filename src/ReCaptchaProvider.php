@@ -28,10 +28,12 @@ class ReCaptchaProvider
 
 	private string $secretKey;
 
-	// Range 0..1 (1.0 is very likely a good interaction, 0.0 is very likely a bot)
+	/**
+	 * Range 0..1 (1.0 is very likely a good interaction, 0.0 is very likely a bot)
+	 */
 	private float $minimalScore;
 
-	public function __construct(string $siteKey, string $secretKey, float $minimalScore)
+	public function __construct(string $siteKey, string $secretKey, float $minimalScore = 0)
 	{
 		$this->siteKey = $siteKey;
 		$this->secretKey = $secretKey;

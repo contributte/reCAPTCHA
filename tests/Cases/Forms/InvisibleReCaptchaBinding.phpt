@@ -11,7 +11,7 @@ use Tester\Assert;
 
 require __DIR__ . '/../../bootstrap.php';
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$provider = new ReCaptchaProvider('foo', 'bar');
 	InvisibleReCaptchaBinding::bind($provider);
 
@@ -24,7 +24,7 @@ Toolkit::test(function () {
 	Assert::same('foo', $recaptcha->getControl()->{'data-sitekey'});
 });
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$provider = new ReCaptchaProvider('foo', 'bar');
 	InvisibleReCaptchaBinding::bind($provider);
 
@@ -33,7 +33,7 @@ Toolkit::test(function () {
 	Assert::false($recaptcha->isRequired());
 });
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$provider = new ReCaptchaProvider('foo', 'bar');
 	InvisibleReCaptchaBinding::bind($provider);
 

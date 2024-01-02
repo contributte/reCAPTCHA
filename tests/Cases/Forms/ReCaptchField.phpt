@@ -15,17 +15,14 @@ require __DIR__ . '/../../bootstrap.php';
 final class FormMock extends Form
 {
 
-	/**
-	 * @return mixed
-	 */
-	public function getHttpData(?int $type = null, ?string $htmlName = null)
+	public function getHttpData(?int $type = null, ?string $htmlName = null): mixed
 	{
 		return $htmlName;
 	}
 
 }
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$field = new ReCaptchaField(new ReCaptchaProvider('foobar', 'secret'));
 	Assert::equal(['g-recaptcha' => true], $field->getControlPrototype()->getClass());
 
@@ -36,7 +33,7 @@ Toolkit::test(function () {
 	Assert::equal('foobar', $field->getControlPrototype()->getClass());
 });
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$form = new FormMock('form');
 
 	$fieldName = 'captcha';
@@ -48,7 +45,7 @@ Toolkit::test(function () {
 	Assert::equal(sprintf(BaseControl::$idMask, $form->getName() . '-' . $fieldName), $field->getHtmlId());
 });
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$form = new FormMock('form');
 
 	$fieldName = 'captcha';
@@ -59,7 +56,7 @@ Toolkit::test(function () {
 	Assert::equal($key, $field->getControl()->{'data-sitekey'});
 });
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$form = new FormMock('form');
 
 	$fieldName = 'captcha';

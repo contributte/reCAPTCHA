@@ -2,7 +2,6 @@
 
 namespace Contributte\ReCaptcha\Forms;
 
-use Contributte\ReCaptcha\Exceptions\InvalidScoreException;
 use Contributte\ReCaptcha\ReCaptchaProvider;
 use Nette\Forms\Controls\HiddenField;
 use Nette\Forms\Form;

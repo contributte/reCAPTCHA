@@ -8,17 +8,17 @@ use Tester\Assert;
 
 require __DIR__ . '/../bootstrap.php';
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$response = new ReCaptchaResponse(true);
 	Assert::true($response->isSuccess());
 });
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$response = new ReCaptchaResponse(true);
 	Assert::equal('1', (string) $response);
 });
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$error = 'Some error';
 	$response = new ReCaptchaResponse(false, $error);
 	Assert::false($response->isSuccess());

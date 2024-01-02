@@ -2,10 +2,6 @@
 
 namespace Tests\Cases\Forms;
 
-/**
- * Test: ReCaptchaBinding
- */
-
 use Contributte\ReCaptcha\Forms\ReCaptchaBinding;
 use Contributte\ReCaptcha\Forms\ReCaptchaField;
 use Contributte\ReCaptcha\ReCaptchaProvider;
@@ -15,7 +11,7 @@ use Tester\Assert;
 
 require __DIR__ . '/../../bootstrap.php';
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$provider = new ReCaptchaProvider('foo', 'bar');
 	ReCaptchaBinding::bind($provider);
 
@@ -29,7 +25,7 @@ Toolkit::test(function () {
 	Assert::same('foo', $recaptcha->getControl()->{'data-sitekey'});
 });
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$provider = new ReCaptchaProvider('foo', 'bar');
 	ReCaptchaBinding::bind($provider);
 
@@ -38,7 +34,7 @@ Toolkit::test(function () {
 	Assert::same('My label', $recaptcha->getLabel()->getText());
 });
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$provider = new ReCaptchaProvider('foo', 'bar');
 	ReCaptchaBinding::bind($provider);
 
@@ -47,7 +43,7 @@ Toolkit::test(function () {
 	Assert::false($recaptcha->isRequired());
 });
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$provider = new ReCaptchaProvider('foo', 'bar');
 	ReCaptchaBinding::bind($provider);
 

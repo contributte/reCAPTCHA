@@ -13,9 +13,9 @@ use Tester\Assert;
 
 require __DIR__ . '/../../bootstrap.php';
 
-Toolkit::test(function () {
+Toolkit::test(function (): void {
 	$loader = new ContainerLoader(Environment::getTestDir());
-	$class = $loader->load(function (Compiler $compiler) {
+	$class = $loader->load(function (Compiler $compiler): void {
 		$compiler->addExtension('captcha', new ReCaptchaExtension());
 
 		$compiler->addConfig([
@@ -31,10 +31,10 @@ Toolkit::test(function () {
 	Assert::equal('foobar', $container->getByType(ReCaptchaProvider::class)->getSiteKey());
 });
 
-Toolkit::test(function () {
-	Assert::exception(function () {
+Toolkit::test(function (): void {
+	Assert::exception(function (): void {
 		$loader = new ContainerLoader(Environment::getTestDir());
-		$loader->load(function (Compiler $compiler) {
+		$loader->load(function (Compiler $compiler): void {
 			$compiler->addExtension('captcha', new ReCaptchaExtension());
 			$compiler->addConfig([
 				'captcha' => [
