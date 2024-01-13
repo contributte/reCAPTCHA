@@ -5,7 +5,9 @@ namespace Tests\Cases;
 use Contributte\ReCaptcha\ReCaptchaProvider;
 use Contributte\ReCaptcha\ReCaptchaResponse;
 use Contributte\Tester\Toolkit;
+use Mockery;
 use Nette\Forms\Controls\BaseControl;
+use Nette\Utils\Json;
 use Tester\Assert;
 
 require __DIR__ . '/../bootstrap.php';
@@ -21,10 +23,9 @@ final class ControlMock extends BaseControl
 }
 
 Toolkit::test(function (): void {
-	$key = 'key';
-	$validator = new ReCaptchaProvider($key, 'secret');
+	$provider = new ReCaptchaProvider('key', 'secret');
 
-	$response = $validator->validate('test');
+	$response = $provider->validate('test');
 	Assert::type(ReCaptchaResponse::class, $response);
 
 	Assert::false($response->isSuccess());
@@ -32,15 +33,72 @@ Toolkit::test(function (): void {
 });
 
 Toolkit::test(function (): void {
-	$key = 'key';
-	$validator = new ReCaptchaProvider($key, 'secret');
+	$provider = new ReCaptchaProvider('key', 'secret');
 
-	Assert::false($validator->validateControl(new ControlMock()));
+	Assert::false($provider->validateControl(new ControlMock()));
 });
 
+// makeRequest returns null
 Toolkit::test(function (): void {
-	$key = 'key';
-	$validator = new ReCaptchaProvider($key, 'secret');
+	$provider = Mockery::mock(ReCaptchaProvider::class)
+		->shouldAllowMockingProtectedMethods()
+		->makePartial();
 
-	Assert::false($validator->validateControl(new ControlMock()));
+	$provider->shouldReceive('makeRequest')
+		->once()
+		->andReturn(null);
+
+	Assert::null($provider->validate('test'));
+});
+
+// makeRequest returns success false
+Toolkit::test(function (): void {
+	$provider = Mockery::mock(ReCaptchaProvider::class)
+		->shouldAllowMockingProtectedMethods()
+		->makePartial();
+
+	$provider->shouldReceive('makeRequest')
+		->once()
+		->andReturn(Json::encode([
+			'success' => false,
+			'error-codes' => ['test'],
+		]));
+
+	Assert::false($provider->validate('test')->isSuccess());
+});
+
+// scoring
+Toolkit::test(function (): void {
+	$provider = Mockery::mock(ReCaptchaProvider::class)
+		->shouldAllowMockingProtectedMethods()
+		->makePartial();
+
+	$provider->shouldReceive('makeRequest')
+		->once()
+		->andReturn(Json::encode([
+			'success' => true,
+			'score' => 0.2,
+		]));
+
+	$provider->setMinimalScore(0.5);
+	Assert::false($provider->validate('test')->isSuccess());
+
+	$provider->setMinimalScore(0.1);
+	Assert::true($provider->validate('test')->isSuccess());
+});
+
+// score is missing
+Toolkit::test(function (): void {
+	$provider = Mockery::mock(ReCaptchaProvider::class)
+		->shouldAllowMockingProtectedMethods()
+		->makePartial();
+
+	$provider->shouldReceive('makeRequest')
+		->once()
+		->andReturn(Json::encode([
+			'success' => true,
+		]));
+
+	$provider->setMinimalScore(0.5);
+	Assert::true($provider->validate('test')->isSuccess());
 });

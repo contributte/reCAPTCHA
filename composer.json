@@ -29,7 +29,8 @@
   "require-dev": {
     "contributte/qa": "^0.4",
     "contributte/tester": "^0.3",
-    "contributte/phpstan": "^0.1"
+    "contributte/phpstan": "^0.1" ,
+    "mockery/mockery": "^1.6.7"
   },
   "autoload": {
     "psr-4": {
