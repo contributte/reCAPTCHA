@@ -63,7 +63,10 @@ class ReCaptchaProvider
 		$answer = json_decode($response, true);
 
 		// Return response
-		return $answer['success'] === true && $answer['score'] >= $this->minimalScore ? new ReCaptchaResponse(true) : new ReCaptchaResponse(false, $answer['error-codes'] ?? null);
+		return ($answer['success'] === true && ($this->minimalScore <= 0
+				|| !isset($answer['score']) || $answer['score'] >= $this->minimalScore))
+			? new ReCaptchaResponse(true)
+			: new ReCaptchaResponse(false, $answer['error-codes'] ?? null);
 	}
 
 	public function validateControl(BaseControl $control): bool
