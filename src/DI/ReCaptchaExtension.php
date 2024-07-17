@@ -16,8 +16,8 @@ final class ReCaptchaExtension extends CompilerExtension
 	public function getConfigSchema(): Schema
 	{
 		return Expect::structure([
-			'siteKey' => Expect::string()->required(),
-			'secretKey' => Expect::string()->required(),
+			'siteKey' => Expect::string()->required()->dynamic(),
+			'secretKey' => Expect::string()->required()->dynamic(),
 			'minimalScore' => Expect::anyOf(Expect::float()->min(0)->max(1), Expect::int()->min(0)->max(1))->default(0),
 		]);
 	}
