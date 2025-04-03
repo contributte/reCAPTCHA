@@ -36,7 +36,7 @@ class InvisibleReCaptchaField extends HiddenField
 
 		$form = $this->getForm();
 		assert($form !== null);
-		$this->setValue($form->getHttpData(Form::DATA_TEXT, ReCaptchaProvider::FORM_PARAMETER));
+		$this->setValue($form->getHttpData(Form::DataText, ReCaptchaProvider::FORM_PARAMETER));
 	}
 
 	public function setMessage(string $message): self
