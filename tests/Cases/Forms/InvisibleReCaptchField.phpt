@@ -7,6 +7,7 @@ use Contributte\ReCaptcha\ReCaptchaProvider;
 use Contributte\Tester\Toolkit;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Form;
+use Nette\Http\FileUpload;
 use Nette\Utils\Html;
 use Tester\Assert;
 
@@ -15,7 +16,7 @@ require __DIR__ . '/../../bootstrap.php';
 final class FormMock extends Form
 {
 
-	public function getHttpData(?int $type = null, ?string $htmlName = null): mixed
+	public function getHttpData(?int $type = null, ?string $htmlName = null): FileUpload|array|string|null
 	{
 		return $htmlName;
 	}
