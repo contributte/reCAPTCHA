@@ -24,20 +24,14 @@ class ReCaptchaProvider
 	/** @var callable[] */
 	public array $onValidateControl = [];
 
-	private string $siteKey;
-
-	private string $secretKey;
-
-	/**
-	 * Range 0..1 (1.0 is very likely a good interaction, 0.0 is very likely a bot)
-	 */
-	private float $minimalScore;
-
-	public function __construct(string $siteKey, string $secretKey, float $minimalScore = 0)
+	public function __construct(
+		private readonly string $siteKey,
+		private readonly string $secretKey,
+		private float $minimalScore = 0, // Range 0..1 (1.0 is very likely a good interaction, 0.0 is very likely a bot)
+		private readonly int $timeout = 5,
+		private readonly int $attempts = 3,
+	)
 	{
-		$this->siteKey = $siteKey;
-		$this->secretKey = $secretKey;
-		$this->setMinimalScore($minimalScore);
 	}
 
 	public function getSiteKey(): string
@@ -106,7 +100,21 @@ class ReCaptchaProvider
 			$params['remoteip'] = $remoteIp;
 		}
 
-		$content = file_get_contents($this->buildUrl($params));
+		$content = false;
+		$attempts = $this->attempts;
+
+		while ($attempts > 0 && $content === false) {
+			$content = @file_get_contents($this->buildUrl($params), false, stream_context_create([
+				'http' => [
+					'timeout' => $this->timeout,
+				],
+			]));
+			$attempts--;
+		}
+
+		if ($content === false) {
+			trigger_error(self::class . ': Unable to connect to Google ReCaptcha API.', E_USER_WARNING);
+		}
 
 		return $content === false ? null : $content;
 	}

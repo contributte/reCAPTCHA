@@ -23,15 +23,32 @@ The latest version is most suitable for **Nette 2.4** and **PHP >=5.6**.
 composer require contributte/recaptcha
 ```
 
-## Configuration
+Register prepared [compiler extension](https://doc.nette.org/en/dependency-injection/nette-container) in your `config.neon` file.
 
 ```neon
 extensions:
 	recaptcha: Contributte\ReCaptcha\DI\ReCaptchaExtension
+```
 
+## Configuration
+
+### Minimal configuration
+
+```neon
 recaptcha:
 	secretKey: ***
 	siteKey: ***
+```
+
+### Advanced configuration
+
+```neon
+recaptcha:
+	secretKey: ***
+	siteKey: ***
+	minimalScore: 0.5 # 0.0-1.0 v3 recaptcha threshold, 0.0 is likely a bot, 1.0 is likely a human
+	apiRequestTimeout: 5 # api request timeout
+	apiRequestAttempts: 3 # api request attempts
 ```
 
 ## Usage
