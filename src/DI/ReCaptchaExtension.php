@@ -19,8 +19,8 @@ final class ReCaptchaExtension extends CompilerExtension
 			'siteKey' => Expect::string()->required()->dynamic(),
 			'secretKey' => Expect::string()->required()->dynamic(),
 			'minimalScore' => Expect::anyOf(Expect::float()->min(0)->max(1), Expect::int()->min(0)->max(1))->default(0.5)->dynamic(),
-			'apiRequestTimeout' => Expect::int()->default(5)->dynamic(),
-			'apiRequestAttempts' => Expect::int()->default(3)->dynamic(),
+			'timeout' => Expect::int()->default(5)->dynamic(),
+			'retries' => Expect::int()->default(3)->dynamic(),
 		]);
 	}
 
@@ -33,7 +33,7 @@ final class ReCaptchaExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('provider'))
-			->setFactory(ReCaptchaProvider::class, [$config['siteKey'], $config['secretKey'], $config['minimalScore'], $config['apiRequestTimeout'], $config['apiRequestAttempts']]);
+			->setFactory(ReCaptchaProvider::class, [$config['siteKey'], $config['secretKey'], $config['minimalScore'], $config['timeout'], $config['retries']]);
 	}
 
 	/**
