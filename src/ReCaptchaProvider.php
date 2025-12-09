@@ -29,7 +29,7 @@ class ReCaptchaProvider
 		private readonly string $secretKey,
 		private float $minimalScore = 0, // Range 0..1 (1.0 is very likely a good interaction, 0.0 is very likely a bot)
 		private readonly int $timeout = 5,
-		private readonly int $attempts = 3,
+		private readonly int $retries = 3,
 	)
 	{
 	}
@@ -101,15 +101,15 @@ class ReCaptchaProvider
 		}
 
 		$content = false;
-		$attempts = $this->attempts;
+		$retries = $this->retries;
 
-		while ($attempts > 0 && $content === false) {
+		while ($retries > 0 && $content === false) {
 			$content = @file_get_contents($this->buildUrl($params), false, stream_context_create([
 				'http' => [
 					'timeout' => $this->timeout,
 				],
 			]));
-			$attempts--;
+			$retries--;
 		}
 
 		if ($content === false) {

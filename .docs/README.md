@@ -47,8 +47,8 @@ recaptcha:
 	secretKey: ***
 	siteKey: ***
 	minimalScore: 0.5 # 0.0-1.0 v3 recaptcha threshold, 0.0 is likely a bot, 1.0 is likely a human
-	apiRequestTimeout: 5 # api request timeout
-	apiRequestAttempts: 3 # api request attempts
+	timeout: 5 # request timeout in seconds
+	retries: 3 # request retries
 ```
 
 ## Usage
