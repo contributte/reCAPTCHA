@@ -17,6 +17,9 @@ class InvisibleReCaptchaField extends HiddenField
 
 	private ?string $message = null;
 
+	/** @var string[] */
+	private array $errors = [];
+
 	public function __construct(ReCaptchaProvider $provider, ?string $message = null)
 	{
 		parent::__construct();
@@ -74,6 +77,29 @@ class InvisibleReCaptchaField extends HiddenField
 	public function verify(): bool
 	{
 		return $this->provider->validateControl($this) === true;
+	}
+
+	public function addError(string|\Stringable $message, bool $translate = true): void
+	{
+		$this->errors[] = $message instanceof \Stringable ? (string) $message : $message;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getErrors(): array
+	{
+		return $this->errors;
+	}
+
+	public function hasErrors(): bool
+	{
+		return count($this->errors) > 0;
+	}
+
+	public function cleanErrors(): void
+	{
+		$this->errors = [];
 	}
 
 	public function getControl(?string $caption = null): Html
