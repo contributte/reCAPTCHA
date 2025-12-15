@@ -2,6 +2,8 @@
 
 namespace Contributte\ReCaptcha;
 
+use Contributte\ReCaptcha\Http\HttpClient;
+use Contributte\ReCaptcha\Http\StreamHttpClient;
 use Nette\Forms\Controls\BaseControl;
 use Nette\SmartObject;
 
@@ -24,12 +26,15 @@ class ReCaptchaProvider
 	/** @var callable[] */
 	public array $onValidateControl = [];
 
+	private ?HttpClient $httpClient = null;
+
 	public function __construct(
 		private readonly string $siteKey,
 		private readonly string $secretKey,
 		private float $minimalScore = 0, // Range 0..1 (1.0 is very likely a good interaction, 0.0 is very likely a bot)
 		private readonly int $timeout = 5,
 		private readonly int $retries = 3,
+		private readonly ?string $proxy = null,
 	)
 	{
 	}
@@ -85,6 +90,20 @@ class ReCaptchaProvider
 		$this->minimalScore = $score;
 	}
 
+	public function setHttpClient(HttpClient $httpClient): void
+	{
+		$this->httpClient = $httpClient;
+	}
+
+	public function getHttpClient(): HttpClient
+	{
+		if ($this->httpClient === null) {
+			$this->httpClient = new StreamHttpClient($this->timeout, $this->retries, $this->proxy);
+		}
+
+		return $this->httpClient;
+	}
+
 	protected function makeRequest(?string $response, ?string $remoteIp = null): string|null
 	{
 		if ($response === null || $response === '') {
@@ -100,23 +119,13 @@ class ReCaptchaProvider
 			$params['remoteip'] = $remoteIp;
 		}
 
-		$content = false;
-		$retries = $this->retries;
+		$content = $this->getHttpClient()->get($this->buildUrl($params));
 
-		while ($retries > 0 && $content === false) {
-			$content = @file_get_contents($this->buildUrl($params), false, stream_context_create([
-				'http' => [
-					'timeout' => $this->timeout,
-				],
-			]));
-			$retries--;
-		}
-
-		if ($content === false) {
+		if ($content === null) {
 			trigger_error(self::class . ': Unable to connect to Google ReCaptcha API.', E_USER_WARNING);
 		}
 
-		return $content === false ? null : $content;
+		return $content;
 	}
 
 	/**

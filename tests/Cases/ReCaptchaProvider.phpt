@@ -9,6 +9,7 @@ use Mockery;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Utils\Json;
 use Tester\Assert;
+use Tests\Mocks\DummyHttpClient;
 
 require __DIR__ . '/../bootstrap.php';
 
@@ -23,7 +24,14 @@ final class ControlMock extends BaseControl
 }
 
 Toolkit::test(function (): void {
+	$httpClient = new DummyHttpClient();
+	$httpClient->setResponse(Json::encode([
+		'success' => false,
+		'error-codes' => ['invalid-input-response'],
+	]));
+
 	$provider = new ReCaptchaProvider('key', 'secret');
+	$provider->setHttpClient($httpClient);
 
 	$response = $provider->validate('test');
 	Assert::type(ReCaptchaResponse::class, $response);
@@ -33,7 +41,14 @@ Toolkit::test(function (): void {
 });
 
 Toolkit::test(function (): void {
+	$httpClient = new DummyHttpClient();
+	$httpClient->setResponse(Json::encode([
+		'success' => false,
+		'error-codes' => ['invalid-input-response'],
+	]));
+
 	$provider = new ReCaptchaProvider('key', 'secret');
+	$provider->setHttpClient($httpClient);
 
 	Assert::false($provider->validateControl(new ControlMock()));
 });
