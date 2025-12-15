@@ -14,6 +14,7 @@ final class FormMock extends Form
 	public function __construct(string $recaptchaResponse = '')
 	{
 		parent::__construct('form');
+
 		$this->recaptchaResponse = $recaptchaResponse;
 	}
 
