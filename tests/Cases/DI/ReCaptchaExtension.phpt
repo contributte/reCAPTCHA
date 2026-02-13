@@ -3,7 +3,6 @@
 namespace Tests\Cases\DI;
 
 use Contributte\ReCaptcha\DI\ReCaptchaExtension;
-use Contributte\ReCaptcha\Http\HttpClient;
 use Contributte\ReCaptcha\ReCaptchaProvider;
 use Contributte\Tester\Environment;
 use Contributte\Tester\Toolkit;
