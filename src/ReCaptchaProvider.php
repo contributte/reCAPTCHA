@@ -10,6 +10,7 @@ use Nette\SmartObject;
 /**
  * @method onValidateControl(ReCaptchaProvider $provider, BaseControl $control)
  * @method onValidate(ReCaptchaProvider $provider, mixed $response)
+ * @phpstan-import-type ReCaptchaResponseData from ReCaptchaResponse
  */
 class ReCaptchaProvider
 {
@@ -58,14 +59,14 @@ class ReCaptchaProvider
 		}
 
 		// Decode server answer (with key assoc reserved)
-		/** @var mixed[] $answer */
+		/** @var ReCaptchaResponseData $answer */
 		$answer = json_decode($response, true);
 
 		// Return response
 		return ($answer['success'] === true && ($this->minimalScore <= 0
 				|| !isset($answer['score']) || $answer['score'] >= $this->minimalScore))
-			? new ReCaptchaResponse(true)
-			: new ReCaptchaResponse(false, $answer['error-codes'] ?? null);
+			? new ReCaptchaResponse(true, null, $answer)
+			: new ReCaptchaResponse(false, $answer['error-codes'] ?? null, $answer);
 	}
 
 	public function validateControl(BaseControl $control): bool
