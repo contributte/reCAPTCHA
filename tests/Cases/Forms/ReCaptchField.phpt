@@ -5,10 +5,13 @@ namespace Tests\Cases\Forms;
 use Contributte\ReCaptcha\Forms\ReCaptchaField;
 use Contributte\ReCaptcha\ReCaptchaProvider;
 use Contributte\Tester\Toolkit;
+use Mockery;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Form;
+use Nette\Forms\Rules;
 use Nette\Http\FileUpload;
 use Nette\Utils\Html;
+use Nette\Utils\Json;
 use Tester\Assert;
 
 require __DIR__ . '/../../bootstrap.php';
@@ -71,3 +74,40 @@ Toolkit::test(function (): void {
 	$field->loadHttpData();
 	Assert::equal(ReCaptchaProvider::FORM_PARAMETER, $field->getValue());
 });
+
+// getRules returns Rules and triggers configureValidation exactly once
+Toolkit::test(function (): void {
+	$field = new ReCaptchaField(new ReCaptchaProvider('key', 'secret'));
+
+	$rules = $field->getRules();
+	Assert::type(Rules::class, $rules);
+	Assert::count(1, iterator_to_array($rules));
+
+	// calling again must not add the rule a second time
+	$field->getRules();
+	Assert::count(1, iterator_to_array($rules));
+});
+
+// setMessage returns self and overrides constructor message
+Toolkit::test(function (): void {
+	$provider = Mockery::mock(ReCaptchaProvider::class, ['key', 'secret'])
+		->shouldAllowMockingProtectedMethods()
+		->makePartial();
+
+	$provider->shouldReceive('makeRequest')
+		->andReturn(Json::encode(['success' => false]));
+
+	$form = new FormMock('form');
+	$field = new ReCaptchaField($provider, null, 'Original message');
+	$result = $field->setMessage('Custom message');
+	$form->addComponent($field, 'recaptcha');
+
+	$field->loadHttpData();
+	$field->validate();
+
+	Assert::same($field, $result);
+	Assert::contains('Custom message', $field->getErrors());
+	Assert::notContains('Original message', $field->getErrors());
+});
+
+Mockery::close();
