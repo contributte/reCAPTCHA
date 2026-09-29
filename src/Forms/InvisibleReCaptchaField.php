@@ -112,6 +112,10 @@ class InvisibleReCaptchaField extends HiddenField
 			'data-size' => 'invisible',
 		]);
 
+		// Control is rendered as <div>, drop input-only attributes (invalid HTML)
+		$el->name = null;
+		$el->value = null;
+
 		return $el;
 	}
 

@@ -110,4 +110,29 @@ Toolkit::test(function (): void {
 	Assert::notContains('Original message', $field->getErrors());
 });
 
+// rendered <div> has no input-only attributes (valid HTML)
+Toolkit::test(function (): void {
+	$form = new FormMock('form');
+
+	$field = new ReCaptchaField(new ReCaptchaProvider('key', 'secret'));
+	$field->setRequired('Please verify');
+	$form->addComponent($field, 'captcha');
+	$field->loadHttpData();
+
+	$el = $field->getControl();
+	Assert::same('div', $el->getName());
+	Assert::null($el->getAttribute('type'));
+	Assert::null($el->getAttribute('name'));
+	Assert::null($el->getAttribute('value'));
+	Assert::null($el->getAttribute('required'));
+	Assert::same('key', $el->getAttribute('data-sitekey'));
+	Assert::same('frm-form-captcha', $el->getAttribute('id'));
+	Assert::equal(['g-recaptcha' => true], $el->getClass());
+	Assert::notNull($el->getAttribute('data-nette-rules'));
+	Assert::same(
+		'<div class="g-recaptcha" id="frm-form-captcha" data-nette-rules=\'[{"op":":filled","msg":"Please verify"}]\' data-sitekey="key"></div>',
+		(string) $el,
+	);
+});
+
 Mockery::close();

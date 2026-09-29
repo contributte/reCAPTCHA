@@ -133,4 +133,24 @@ Toolkit::test(function (): void {
 	);
 });
 
+// rendered <div> has no input-only attributes (valid HTML)
+Toolkit::test(function (): void {
+	$form = new FormMock('form');
+
+	$field = new InvisibleReCaptchaField(new ReCaptchaProvider('key', 'secret'));
+	$form->addComponent($field, 'captcha');
+	$field->loadHttpData();
+
+	$el = $field->getControl();
+	Assert::same('div', $el->getName());
+	Assert::null($el->getAttribute('type'));
+	Assert::null($el->getAttribute('name'));
+	Assert::null($el->getAttribute('value'));
+	Assert::null($el->getAttribute('required'));
+	Assert::same('key', $el->getAttribute('data-sitekey'));
+	Assert::same('invisible', $el->getAttribute('data-size'));
+	Assert::equal(['g-recaptcha' => true], $el->getClass());
+	Assert::same('<div class="g-recaptcha" data-sitekey="key" data-size="invisible"></div>', (string) $el);
+});
+
 Mockery::close();
