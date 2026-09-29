@@ -70,9 +70,14 @@ class ReCaptchaField extends TextInput
 		$el = parent::getControl();
 		$el->addAttributes([
 			'id' => $this->getHtmlId(),
-			'name' => $this->getHtmlName(),
 			'data-sitekey' => $this->provider->getSiteKey(),
 		]);
+
+		// Control is rendered as <div>, drop input-only attributes (invalid HTML)
+		$el->type = null;
+		$el->name = null;
+		$el->value = null;
+		$el->required = null;
 
 		return $el;
 	}
